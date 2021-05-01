@@ -1,11 +1,12 @@
-import { AppBar, CssBaseline } from "@material-ui/core";
+import { AppBar, CssBaseline, Paper } from "@material-ui/core";
 import "@fontsource/roboto";
 
 export function App() {
   return (
     <>
       <CssBaseline />
-      <AppBar>Look Back</AppBar>
+      <AppBar position="sticky">Look Back</AppBar>
+      <Paper>Inspection</Paper>
     </>
   );
 }

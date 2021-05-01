@@ -6,3 +6,9 @@ test("renders a title bar", () => {
   const title = screen.getByText(/look back/i);
   expect(title).toHaveTextContent(/look back/i);
 });
+
+test("renders a section for inspections", () => {
+  render(<App />);
+  const inspection = screen.getByText(/inspection/i);
+  expect(inspection).toHaveTextContent(/inspection/i);
+});
