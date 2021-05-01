@@ -1,6 +1,8 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { App } from "App";
 
-test("renders without crashing", () => {
+test("renders a title bar", () => {
   render(<App />);
+  const title = screen.getByText(/look back/i);
+  expect(title).toHaveTextContent(/look back/i);
 });
