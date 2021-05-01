@@ -12,3 +12,9 @@ test("renders a section for inspections", () => {
   const inspection = screen.getByText(/inspection/i);
   expect(inspection).toHaveTextContent(/inspection/i);
 });
+
+test("renders a section for MELs", () => {
+  render(<App />);
+  const mel = screen.getByText(/mel/i);
+  expect(mel).toHaveTextContent(/mel/i);
+});

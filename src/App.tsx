@@ -7,6 +7,7 @@ export function App() {
       <CssBaseline />
       <AppBar position="sticky">Look Back</AppBar>
       <Paper>Inspection</Paper>
+      <Paper>MEL</Paper>
     </>
   );
 }
