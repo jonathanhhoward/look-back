@@ -1,6 +1,6 @@
-import { CssBaseline, Paper } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import "@fontsource/roboto";
-import { Inspections, TitleBar } from "components";
+import { Inspections, Mels, TitleBar } from "components";
 
 export function App() {
   return (
@@ -8,7 +8,7 @@ export function App() {
       <CssBaseline />
       <TitleBar />
       <Inspections />
-      <Paper>MEL</Paper>
+      <Mels />
     </>
   );
 }
