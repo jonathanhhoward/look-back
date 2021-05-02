@@ -1,12 +1,13 @@
 import { Container, Paper } from "@material-ui/core";
+import { Inspection } from "components";
 
 export function InspectionList() {
   return (
     <Paper>
       <Container>
         <h2>Inspections</h2>
-        <h3>14-Day</h3>
-        <h3>2-Day</h3>
+        <Inspection title="14-Day" />
+        <Inspection title="2-Day" />
       </Container>
     </Paper>
   );
