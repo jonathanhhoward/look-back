@@ -1,6 +1,6 @@
 import { Container, Paper } from "@material-ui/core";
 
-export function Inspections() {
+export function InspectionList() {
   return (
     <Paper>
       <Container>

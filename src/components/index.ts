@@ -1,4 +1,4 @@
 export * from "./App";
-export * from "./Inspections";
+export * from "./InspectionList";
 export * from "./Mels";
 export * from "./TitleBar";
