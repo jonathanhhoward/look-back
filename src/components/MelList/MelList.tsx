@@ -1,6 +1,6 @@
 import { Container, Paper } from "@material-ui/core";
 
-export function Mels() {
+export function MelList() {
   return (
     <Paper>
       <Container>

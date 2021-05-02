@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { Mels } from "./Mels";
+import { MelList } from "./MelList";
 
 test("renders the component title", () => {
-  render(<Mels />);
+  render(<MelList />);
   const mel = screen.getByText(/^mels$/i);
   expect(mel).toHaveTextContent(/^mels$/i);
 });

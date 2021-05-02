@@ -1,6 +1,6 @@
 import { CssBaseline } from "@material-ui/core";
 import "@fontsource/roboto";
-import { InspectionList, Mels, TitleBar } from "components";
+import { InspectionList, MelList, TitleBar } from "components";
 
 export function App() {
   return (
@@ -8,7 +8,7 @@ export function App() {
       <CssBaseline />
       <TitleBar />
       <InspectionList />
-      <Mels />
+      <MelList />
     </>
   );
 }
