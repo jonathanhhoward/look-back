@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { MelList } from "./MelList";
+import { MelList } from "components";
 
 test("renders the component title", () => {
   render(<MelList />);

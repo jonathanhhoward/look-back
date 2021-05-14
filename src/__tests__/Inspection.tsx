@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Inspection } from "./Inspection";
+import { Inspection } from "components";
 
 test("renders the inspection title", () => {
   render(<Inspection title="A Title" />);

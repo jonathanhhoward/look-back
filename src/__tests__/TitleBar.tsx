@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { TitleBar } from "./TitleBar";
+import { TitleBar } from "components";
 
 test("renders the title", () => {
   render(<TitleBar />);
