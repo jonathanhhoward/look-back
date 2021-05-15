@@ -4,7 +4,7 @@ export function MelList() {
   return (
     <Paper>
       <Container>
-        <h2>MELs</h2>
+        <h2>MEL</h2>
       </Container>
     </Paper>
   );

@@ -3,6 +3,6 @@ import { MelList } from "components";
 
 test("renders the component title", () => {
   render(<MelList />);
-  const mel = screen.getByText(/^mels$/i);
-  expect(mel).toHaveTextContent(/^mels$/i);
+  const mel = screen.getByText(/^mel$/i);
+  expect(mel).toHaveTextContent(/^mel$/i);
 });

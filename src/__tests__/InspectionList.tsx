@@ -3,8 +3,8 @@ import { InspectionList } from "components";
 
 test("renders the component title", () => {
   render(<InspectionList />);
-  const inspections = screen.getByText(/^inspections$/i);
-  expect(inspections).toHaveTextContent(/^inspections$/i);
+  const inspections = screen.getByText(/^inspection$/i);
+  expect(inspections).toHaveTextContent(/^inspection$/i);
 });
 
 test("renders the subtitle for 14-day inspections", () => {

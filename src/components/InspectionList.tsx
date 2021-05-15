@@ -5,7 +5,7 @@ export function InspectionList() {
   return (
     <Paper>
       <Container>
-        <h2>Inspections</h2>
+        <h2>Inspection</h2>
         <Inspection title="14-Day" />
         <Inspection title="2-Day" />
       </Container>
