@@ -62,5 +62,8 @@ test("title color is 'error' when inspection is expired", () => {
     />
   );
   const header = screen.getByText("14-day");
-  expect(header).toHaveStyle(`color: ${palette.error.main}`);
+  expect(header).toHaveStyle({
+    color: palette.error.contrastText,
+    backgroundColor: palette.error.main,
+  });
 });
