@@ -48,3 +48,19 @@ test("title color is 'warning' when inspection expires today", () => {
   const header = screen.getByText("14-day");
   expect(header).toHaveStyle(`color: ${palette.warning.main}`);
 });
+
+test("title color is 'error' when inspection is expired", () => {
+  const fifteenDaysAgo = Interval.before(
+    DateTime.now(),
+    Duration.fromISO("P15D")
+  ).start;
+  render(
+    <Inspection
+      title="14-day"
+      duration={14}
+      initialDate={fifteenDaysAgo.toSQLDate()}
+    />
+  );
+  const header = screen.getByText("14-day");
+  expect(header).toHaveStyle(`color: ${palette.error.main}`);
+});
