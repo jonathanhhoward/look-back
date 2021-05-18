@@ -4,6 +4,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Typography,
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -40,11 +41,11 @@ export function Inspection({ title, duration, initialDate }: Props) {
     <MuiPickersUtilsProvider utils={LuxonUtils}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <h3>
+          <Typography variant="subtitle1">
             <Box component="span" color={color}>
               {title}
             </Box>
-          </h3>
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <DatePicker
