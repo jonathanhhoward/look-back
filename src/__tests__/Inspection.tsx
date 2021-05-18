@@ -18,15 +18,33 @@ test("renders a datepicker", () => {
 });
 
 test("title color is 'success' when inspection expires after today", () => {
-  const oneDayAgo = Interval.before(DateTime.now(), Duration.fromISO("P1D"))
-    .start;
+  const thirteenDaysAgo = Interval.before(
+    DateTime.now(),
+    Duration.fromISO("P13D")
+  ).start;
   render(
     <Inspection
       title="14-day"
       duration={14}
-      initialDate={oneDayAgo.toSQLDate()}
+      initialDate={thirteenDaysAgo.toSQLDate()}
     />
   );
   const header = screen.getByText("14-day");
   expect(header).toHaveStyle(`color: ${palette.success.main}`);
+});
+
+test("title color is 'warning' when inspection expires today", () => {
+  const fourteenDaysAgo = Interval.before(
+    DateTime.now(),
+    Duration.fromISO("P14D")
+  ).start;
+  render(
+    <Inspection
+      title="14-day"
+      duration={14}
+      initialDate={fourteenDaysAgo.toSQLDate()}
+    />
+  );
+  const header = screen.getByText("14-day");
+  expect(header).toHaveStyle(`color: ${palette.warning.main}`);
 });

@@ -25,6 +25,7 @@ export function Inspection({ title, duration, initialDate }: Props) {
     const interval = Interval.fromDateTimes(date, DateTime.now());
     const days = Math.floor(interval.length("days"));
     if (days < duration) color = "success.main";
+    else if (days === duration) color = "warning.main";
   }
   return (
     <MuiPickersUtilsProvider utils={LuxonUtils}>
