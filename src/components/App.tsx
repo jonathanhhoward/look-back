@@ -1,4 +1,4 @@
-import { CssBaseline } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { DeferralList, InspectionList, TitleBar } from "components";
 import "@fontsource/roboto";
 

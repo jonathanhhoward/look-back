@@ -1,5 +1,7 @@
-import { Card, CardHeader, IconButton } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 
 export function DeferralList() {
   return (
@@ -8,7 +10,7 @@ export function DeferralList() {
         title="Deferral"
         action={
           <IconButton>
-            <Add />
+            <AddIcon />
           </IconButton>
         }
       />

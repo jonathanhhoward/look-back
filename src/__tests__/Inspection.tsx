@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core/styles";
 import { DateTime, Duration, Interval } from "luxon";
 import { Inspection } from "components";
 

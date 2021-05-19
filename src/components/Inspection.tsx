@@ -1,12 +1,10 @@
 import { useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Typography,
-} from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import LuxonUtils from "@date-io/luxon";
@@ -54,7 +52,7 @@ export function Inspection({ title, duration, initialDate }: Props) {
   return (
     <MuiPickersUtilsProvider utils={LuxonUtils}>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMore />}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography variant="subtitle1">
             <Box
               component="span"
