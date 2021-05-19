@@ -6,3 +6,9 @@ test("renders the component title", () => {
   const title = screen.getByText(/^deferral$/i);
   expect(title).toHaveTextContent(/^deferral$/i);
 });
+
+test("renders an add button", () => {
+  render(<DeferralList />);
+  const button = screen.getByRole("button");
+  expect(button).toBeInTheDocument();
+});
