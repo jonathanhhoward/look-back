@@ -10,7 +10,7 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import LuxonUtils from "@date-io/luxon";
 import { DateTime, Interval } from "luxon";
 
-interface Props {
+interface InspectionProps {
   title: string;
   duration: number;
   initialDate?: string;
@@ -43,7 +43,7 @@ function inspectionStatus(
   return { color, bgcolor };
 }
 
-export function Inspection({ title, duration, initialDate }: Props) {
+export function Inspection({ title, duration, initialDate }: InspectionProps) {
   const init = initialDate ? DateTime.fromISO(initialDate) : null;
   const [date, setDate] = useState<MaterialUiPickersDate>(init);
   const status = inspectionStatus(date, duration);
