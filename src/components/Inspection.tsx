@@ -28,20 +28,18 @@ interface InspectionStatus {
 function inspectionStatus(
   date: DateTime | null,
   duration: number
-): InspectionStatus | null {
-  if (date === null) return null;
+): InspectionStatus | undefined {
+  if (!date) return;
   const interval = Interval.fromDateTimes(date, DateTime.now());
   const days = Math.floor(interval.length("days"));
-  let color: InspectionColor;
-  let bgcolor: InspectionBgcolor;
-  if (days < duration) {
-    color = "success.main";
-  } else if (days === duration) {
-    color = "warning.main";
-  } else {
-    color = "error.contrastText";
-    bgcolor = "error.main";
-  }
+  const color: InspectionColor =
+    days < duration
+      ? "success.main"
+      : days === duration
+      ? "warning.main"
+      : "error.contrastText";
+  const bgcolor: InspectionBgcolor =
+    color === "error.contrastText" ? "error.main" : undefined;
   return { color, bgcolor };
 }
 
