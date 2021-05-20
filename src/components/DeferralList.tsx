@@ -5,13 +5,17 @@ import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import { Deferral } from "components";
+import { nanoid } from "nanoid";
+
+interface DeferralId {
+  id: string;
+}
 
 export function DeferralList() {
-  const [deferrals, setDeferrals] = useState<string[]>([]);
+  const [deferrals, setDeferrals] = useState<DeferralId[]>([]);
 
   function handleClick() {
-    const nextIndex = deferrals.length + 1;
-    setDeferrals(deferrals.concat(`Deferral${nextIndex}`));
+    setDeferrals(deferrals.concat({ id: `deferral-${nanoid()}` }));
   }
 
   return (
@@ -25,8 +29,8 @@ export function DeferralList() {
         }
       />
       <CardContent>
-        {deferrals.map((deferral, i) => (
-          <Deferral key={i} title={deferral} />
+        {deferrals.map((deferral) => (
+          <Deferral key={deferral.id} />
         ))}
       </CardContent>
     </Card>

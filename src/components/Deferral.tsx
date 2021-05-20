@@ -3,15 +3,11 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 
-interface DeferralProps {
-  title: string;
-}
-
-export function Deferral({ title }: DeferralProps) {
+export function Deferral() {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="subtitle1">{title}</Typography>
+        <Typography variant="subtitle1">New Deferral</Typography>
       </AccordionSummary>
     </Accordion>
   );
