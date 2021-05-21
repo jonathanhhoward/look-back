@@ -22,6 +22,10 @@ export function Deferral() {
         <FormControl>
           <TextField variant="filled" id="number" label="Number" />
         </FormControl>
+        <FormControl>
+          <InputLabel id="category-label">Category</InputLabel>
+          <Select variant="filled" labelId="category-label" value="" />
+        </FormControl>
       </AccordionDetails>
     </Accordion>
   );

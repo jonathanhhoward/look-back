@@ -18,3 +18,9 @@ test("renders input to enter deferral number", () => {
   const textfield = screen.getByLabelText(/^number$/i);
   expect(textfield).toBeInTheDocument();
 });
+
+test("renders input to select deferral category", () => {
+  render(<Deferral />);
+  const select = screen.getByLabelText(/^category$/i);
+  expect(select).toBeInTheDocument();
+});
