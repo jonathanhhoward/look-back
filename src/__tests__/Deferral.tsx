@@ -24,3 +24,8 @@ test("renders input to select deferral category", () => {
   const select = screen.getByLabelText(/^category$/i);
   expect(select).toBeInTheDocument();
 });
+
+test("renders input to enter deferral duration", () => {
+  const input = screen.getByLabelText(/^duration$/i);
+  expect(input).toBeInTheDocument();
+});

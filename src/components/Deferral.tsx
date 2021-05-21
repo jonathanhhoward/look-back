@@ -19,13 +19,17 @@ export function Deferral() {
           <InputLabel id="type-label">Type</InputLabel>
           <Select variant="filled" labelId="type-label" value="" />
         </FormControl>
-        <FormControl>
-          <TextField variant="filled" id="number" label="Number" />
-        </FormControl>
+        <TextField variant="filled" id="number" label="Number" />
         <FormControl>
           <InputLabel id="category-label">Category</InputLabel>
           <Select variant="filled" labelId="category-label" value="" />
         </FormControl>
+        <TextField
+          type="number"
+          variant="filled"
+          id="duration"
+          label="Duration"
+        />
       </AccordionDetails>
     </Accordion>
   );
