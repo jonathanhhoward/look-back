@@ -29,3 +29,8 @@ test("renders input to enter deferral duration", () => {
   const input = screen.getByLabelText(/^duration$/i);
   expect(input).toBeInTheDocument();
 });
+
+test("renders a datepicker", () => {
+  const datepicker = screen.getByLabelText(/^deferral date$/i);
+  expect(datepicker).toBeInTheDocument();
+});

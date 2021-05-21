@@ -30,6 +30,12 @@ export function Deferral() {
           id="duration"
           label="Duration"
         />
+        <TextField
+          type="date"
+          variant="filled"
+          id="date"
+          label="Deferral Date"
+        />
       </AccordionDetails>
     </Accordion>
   );
