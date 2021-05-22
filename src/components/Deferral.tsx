@@ -1,12 +1,15 @@
 import Accordion from "@material-ui/core/Accordion";
+import AccordionActions from "@material-ui/core/AccordionActions";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import FilledInput from "@material-ui/core/FilledInput";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
+import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import LuxonUtils from "@date-io/luxon";
@@ -58,6 +61,11 @@ export function Deferral() {
             </Grid>
           </Grid>
         </AccordionDetails>
+        <AccordionActions>
+          <IconButton data-testid="delete-button">
+            <DeleteIcon />
+          </IconButton>
+        </AccordionActions>
       </Accordion>
     </MuiPickersUtilsProvider>
   );

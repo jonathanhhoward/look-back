@@ -34,3 +34,8 @@ test("renders a datepicker", () => {
   const datepicker = screen.getByLabelText(/^deferral date$/i);
   expect(datepicker).toBeInTheDocument();
 });
+
+test("renders a delete button", () => {
+  const button = screen.getByTestId("delete-button");
+  expect(button).toBeInTheDocument();
+});
