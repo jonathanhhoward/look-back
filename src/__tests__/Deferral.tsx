@@ -10,6 +10,11 @@ test("renders the title", () => {
   expect(heading).toBeInTheDocument();
 });
 
+test("renders a subtitle", () => {
+  const subheading = screen.getByText(/^item number$/i);
+  expect(subheading).toBeInTheDocument();
+});
+
 test("renders input to select type", () => {
   const select = screen.getByLabelText(/^type$/i);
   expect(select).toBeInTheDocument();

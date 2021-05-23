@@ -20,6 +20,7 @@ export function Deferral() {
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography variant="subtitle1">New Deferral</Typography>
+          <Typography variant="subtitle2">Item Number</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={2} justify="center">
