@@ -26,12 +26,12 @@ test("renders input to enter deferral number", () => {
 });
 
 test("renders input to select deferral category", () => {
-  const select = screen.getByLabelText(/^category$/i);
+  const select = screen.getByLabelText(/^cat$/i);
   expect(select).toBeInTheDocument();
 });
 
 test("renders input to enter deferral duration", () => {
-  const input = screen.getByLabelText(/^duration$/i);
+  const input = screen.getByLabelText(/^days$/i);
   expect(input).toBeInTheDocument();
 });
 

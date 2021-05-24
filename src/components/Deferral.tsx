@@ -68,13 +68,13 @@ export function Deferral() {
           <Grid item xs={5} md={2}>
             <FormControl className={classes.splitInput}>
               <InputLabel className={classes.label} id="category">
-                Category
+                Cat
               </InputLabel>
               <Select labelId="category" value="" variant="filled" />
             </FormControl>
             <FormControl className={classes.splitInput}>
               <InputLabel className={classes.label} htmlFor="duration">
-                Duration
+                Days
               </InputLabel>
               <FilledInput
                 id="duration"
