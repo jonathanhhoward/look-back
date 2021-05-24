@@ -1,8 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { Deferral } from "components";
+import userEvent from "@testing-library/user-event";
+
+const handleDelete = jest.fn();
 
 beforeEach(() => {
-  render(<Deferral />);
+  render(<Deferral onDeleteClick={handleDelete} />);
 });
 
 test("renders the title", () => {
@@ -43,4 +46,6 @@ test("renders a datepicker", () => {
 test("renders a delete button", () => {
   const button = screen.getByTestId("delete-button");
   expect(button).toBeInTheDocument();
+  userEvent.click(button);
+  expect(handleDelete).toHaveBeenCalled();
 });
