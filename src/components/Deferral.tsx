@@ -11,63 +11,56 @@ import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import LuxonUtils from "@date-io/luxon";
+import { DateSelector } from "components";
 
 export function Deferral() {
   return (
-    <MuiPickersUtilsProvider utils={LuxonUtils}>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="subtitle1">New Deferral</Typography>
-          <Typography variant="subtitle2">Item Number</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid container spacing={2} justify="center">
-            <Grid item>
-              <FormControl>
-                <InputLabel id="type-label">Type</InputLabel>
-                <Select variant="filled" labelId="type-label" value="" />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl>
-                <InputLabel htmlFor="number">Number</InputLabel>
-                <FilledInput type="text" id="number" />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl>
-                <InputLabel id="category-label">Category</InputLabel>
-                <Select variant="filled" labelId="category-label" value="" />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl>
-                <InputLabel htmlFor="duration">Duration</InputLabel>
-                <FilledInput type="number" id="duration" />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <DatePicker
-                disableFuture
-                disableToolbar
-                format="MM/dd/yyyy"
-                id="deferral-date"
-                inputVariant="filled"
-                label="Deferral Date"
-                onChange={() => {}}
-                value={null}
-              />
-            </Grid>
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography variant="subtitle1">New Deferral</Typography>
+        <Typography variant="subtitle2">Item Number</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Grid container spacing={2} justify="center">
+          <Grid item>
+            <FormControl>
+              <InputLabel id="type-label">Type</InputLabel>
+              <Select variant="filled" labelId="type-label" value="" />
+            </FormControl>
           </Grid>
-        </AccordionDetails>
-        <AccordionActions>
-          <IconButton data-testid="delete-button">
-            <DeleteIcon />
-          </IconButton>
-        </AccordionActions>
-      </Accordion>
-    </MuiPickersUtilsProvider>
+          <Grid item>
+            <FormControl>
+              <InputLabel htmlFor="number">Number</InputLabel>
+              <FilledInput type="text" id="number" />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <InputLabel id="category-label">Category</InputLabel>
+              <Select variant="filled" labelId="category-label" value="" />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <InputLabel htmlFor="duration">Duration</InputLabel>
+              <FilledInput type="number" id="duration" />
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <DateSelector
+              date={null}
+              label="Deferral Date"
+              pickerId="deferral-date"
+              setDate={() => {}}
+            />
+          </Grid>
+        </Grid>
+      </AccordionDetails>
+      <AccordionActions>
+        <IconButton data-testid="delete-button">
+          <DeleteIcon />
+        </IconButton>
+      </AccordionActions>
+    </Accordion>
   );
 }
