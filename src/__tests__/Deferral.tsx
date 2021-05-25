@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 const handleDelete = jest.fn();
 
 beforeEach(() => {
-  render(<Deferral onDeleteClick={handleDelete} />);
+  render(<Deferral deleteId="delete" handleDelete={handleDelete} />);
 });
 
 test("renders the title", () => {

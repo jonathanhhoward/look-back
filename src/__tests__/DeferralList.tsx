@@ -21,3 +21,13 @@ test("renders new deferral on add button click with incremented title", () => {
   const deferral = screen.getByText(/^new deferral$/i);
   expect(deferral).toBeInTheDocument();
 });
+
+test("removes a deferral when its delete button is clicked", () => {
+  render(<DeferralList />);
+  const addButton = screen.getByRole("button");
+  userEvent.click(addButton);
+  const deleteButton = screen.getByTestId("delete-button");
+  expect(deleteButton).toBeInTheDocument();
+  userEvent.click(deleteButton);
+  expect(deleteButton).not.toBeInTheDocument();
+});

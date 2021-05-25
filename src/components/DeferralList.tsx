@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -18,6 +18,11 @@ export function DeferralList() {
     setDeferrals(deferrals.concat({ id: `deferral-${nanoid()}` }));
   }
 
+  function handleDeleteDeferral(event: SyntheticEvent) {
+    const element = event.currentTarget as HTMLElement;
+    setDeferrals(deferrals.filter((deferral) => deferral.id !== element.id));
+  }
+
   return (
     <Card elevation={0} square>
       <CardHeader
@@ -30,7 +35,11 @@ export function DeferralList() {
       />
       <CardContent>
         {deferrals.map((deferral) => (
-          <Deferral key={deferral.id} />
+          <Deferral
+            key={deferral.id}
+            deleteId={deferral.id}
+            handleDelete={handleDeleteDeferral}
+          />
         ))}
       </CardContent>
     </Card>

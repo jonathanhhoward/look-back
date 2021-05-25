@@ -16,7 +16,8 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { DateSelector } from "components";
 
 interface DeferralProps {
-  onDeleteClick: ReactEventHandler;
+  deleteId: string;
+  handleDelete: ReactEventHandler;
 }
 
 const useStyles = makeStyles(({ palette }: Theme) =>
@@ -39,7 +40,7 @@ const useStyles = makeStyles(({ palette }: Theme) =>
   })
 );
 
-export function Deferral({ onDeleteClick }: DeferralProps) {
+export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
 
   return (
@@ -100,7 +101,11 @@ export function Deferral({ onDeleteClick }: DeferralProps) {
         </Grid>
       </AccordionDetails>
       <AccordionActions>
-        <IconButton data-testid="delete-button" onClick={onDeleteClick}>
+        <IconButton
+          data-testid="delete-button"
+          id={deleteId}
+          onClick={handleDelete}
+        >
           <DeleteIcon />
         </IconButton>
       </AccordionActions>
