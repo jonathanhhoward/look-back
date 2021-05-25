@@ -14,7 +14,7 @@ test("renders an add button", () => {
   expect(button).toBeInTheDocument();
 });
 
-test("renders new deferral on add button click with incremented title", () => {
+test("renders new deferral on add button click", () => {
   render(<DeferralList />);
   const button = screen.getByRole("button");
   userEvent.click(button);
