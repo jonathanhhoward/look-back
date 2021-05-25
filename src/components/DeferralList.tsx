@@ -14,7 +14,7 @@ interface DeferralId {
 export function DeferralList() {
   const [deferrals, setDeferrals] = useState<DeferralId[]>([]);
 
-  function handleClick() {
+  function handleAddDeferral() {
     setDeferrals(deferrals.concat({ id: `deferral-${nanoid()}` }));
   }
 
@@ -28,7 +28,7 @@ export function DeferralList() {
       <CardHeader
         title="Deferral"
         action={
-          <IconButton onClick={handleClick}>
+          <IconButton onClick={handleAddDeferral}>
             <AddIcon />
           </IconButton>
         }
