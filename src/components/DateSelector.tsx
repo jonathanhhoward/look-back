@@ -1,16 +1,13 @@
-import { SetStateAction } from "react";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import { makeStyles } from "@material-ui/core/styles";
 import LuxonUtils from "@date-io/luxon";
 
 interface DateSelectorProps {
-  date: MaterialUiPickersDate;
+  handleChange: (date: MaterialUiPickersDate) => void;
   label: string;
   pickerId: string;
-  setDate: (
-    value: SetStateAction<MaterialUiPickersDate> | MaterialUiPickersDate
-  ) => void;
+  value: MaterialUiPickersDate;
   width?: string;
 }
 
@@ -20,15 +17,15 @@ interface DateSelectorStyleProps {
 
 const useStyles = makeStyles({
   datepicker: ({ width }: DateSelectorStyleProps) => ({
-    width: width,
+    width,
   }),
 });
 
 export function DateSelector({
-  date,
+  handleChange,
   label,
   pickerId,
-  setDate,
+  value,
   width,
 }: DateSelectorProps) {
   const classes = useStyles({ width });
@@ -43,8 +40,8 @@ export function DateSelector({
         id={pickerId}
         inputVariant="filled"
         label={label}
-        onChange={setDate}
-        value={date}
+        onChange={handleChange}
+        value={value}
       />
     </MuiPickersUtilsProvider>
   );

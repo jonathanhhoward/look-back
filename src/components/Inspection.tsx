@@ -60,10 +60,10 @@ export function Inspection({ title, duration, initialDate }: InspectionProps) {
       </AccordionSummary>
       <AccordionDetails>
         <DateSelector
-          date={date}
+          handleChange={setDate}
           label="Inspection Date"
           pickerId={`inspection-date-${title}`}
-          setDate={setDate}
+          value={date}
         />
       </AccordionDetails>
     </Accordion>

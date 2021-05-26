@@ -95,10 +95,10 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           </Grid>
           <Grid item xs={7} md={4}>
             <DateSelector
-              date={null}
+              handleChange={() => {}}
               label="Deferral Date"
               pickerId="deferral-date"
-              setDate={() => {}}
+              value={null}
               width="100%"
             />
           </Grid>
