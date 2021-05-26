@@ -47,7 +47,11 @@ export function Inspection({ title, duration, initialDate }: InspectionProps) {
   const status = inspectionStatus(date, duration);
   return (
     <Accordion>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary
+        aria-controls="inspection-details"
+        expandIcon={<ExpandMoreIcon />}
+        id="inspection-summary"
+      >
         <Typography variant="subtitle1">
           <Box component="span" color={status?.color} bgcolor={status?.bgcolor}>
             {title}

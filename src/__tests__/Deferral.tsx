@@ -44,7 +44,7 @@ test("renders a datepicker", () => {
 });
 
 test("renders a delete button", () => {
-  const button = screen.getByTestId("delete-button");
+  const button = screen.getByLabelText(/^delete deferral$/i);
   expect(button).toBeInTheDocument();
   userEvent.click(button);
   expect(handleDelete).toHaveBeenCalled();

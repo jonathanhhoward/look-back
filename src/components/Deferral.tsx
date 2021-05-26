@@ -45,7 +45,11 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
 
   return (
     <Accordion>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary
+        aria-controls="deferral-details"
+        expandIcon={<ExpandMoreIcon />}
+        id="deferral-summary"
+      >
         <Typography className={classes.title} variant="subtitle1">
           New Deferral
         </Typography>
@@ -102,7 +106,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
       </AccordionDetails>
       <AccordionActions>
         <IconButton
-          data-testid="delete-button"
+          aria-label="delete deferral"
           id={deleteId}
           onClick={handleDelete}
         >

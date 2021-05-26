@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { DeferralList } from "components";
 import userEvent from "@testing-library/user-event";
+import { DeferralList } from "components";
 
 test("renders the component title", () => {
   render(<DeferralList />);
@@ -10,13 +10,13 @@ test("renders the component title", () => {
 
 test("renders an add button", () => {
   render(<DeferralList />);
-  const button = screen.getByRole("button");
+  const button = screen.getByLabelText(/^add deferral$/i);
   expect(button).toBeInTheDocument();
 });
 
 test("renders new deferral on add button click", () => {
   render(<DeferralList />);
-  const button = screen.getByRole("button");
+  const button = screen.getByLabelText(/^add deferral$/i);
   userEvent.click(button);
   const deferral = screen.getByText(/^new deferral$/i);
   expect(deferral).toBeInTheDocument();
@@ -24,9 +24,9 @@ test("renders new deferral on add button click", () => {
 
 test("removes a deferral when its delete button is clicked", () => {
   render(<DeferralList />);
-  const addButton = screen.getByRole("button");
+  const addButton = screen.getByLabelText(/^add deferral$/i);
   userEvent.click(addButton);
-  const deleteButton = screen.getByTestId("delete-button");
+  const deleteButton = screen.getByLabelText(/^delete deferral$/i);
   expect(deleteButton).toBeInTheDocument();
   userEvent.click(deleteButton);
   expect(deleteButton).not.toBeInTheDocument();

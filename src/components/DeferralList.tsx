@@ -28,7 +28,7 @@ export function DeferralList() {
       <CardHeader
         title="Deferral"
         action={
-          <IconButton onClick={handleAddDeferral}>
+          <IconButton aria-label="add deferral" onClick={handleAddDeferral}>
             <AddIcon />
           </IconButton>
         }
