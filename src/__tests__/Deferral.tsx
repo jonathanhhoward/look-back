@@ -9,28 +9,28 @@ beforeEach(() => {
 });
 
 test("renders the title", () => {
-  const heading = screen.getByText(/^new deferral$/i);
-  expect(heading).toBeInTheDocument();
+  const title = screen.getByText(/^new deferral$/i);
+  expect(title).toBeInTheDocument();
 });
 
 test("renders a subtitle", () => {
-  const subheading = screen.getByText(/^item number$/i);
-  expect(subheading).toBeInTheDocument();
+  const subtitle = screen.getByText(/^item number$/i);
+  expect(subtitle).toBeInTheDocument();
 });
 
 test("renders input to select type", () => {
-  const select = screen.getByLabelText(/^type$/i);
-  expect(select).toBeInTheDocument();
+  const input = screen.getByLabelText(/^type$/i);
+  expect(input).toBeInTheDocument();
 });
 
 test("renders input to enter deferral number", () => {
-  const textfield = screen.getByLabelText(/^number$/i);
-  expect(textfield).toBeInTheDocument();
+  const input = screen.getByLabelText(/^number$/i);
+  expect(input).toBeInTheDocument();
 });
 
 test("renders input to select deferral category", () => {
-  const select = screen.getByLabelText(/^cat$/i);
-  expect(select).toBeInTheDocument();
+  const input = screen.getByLabelText(/^cat$/i);
+  expect(input).toBeInTheDocument();
 });
 
 test("renders input to enter deferral duration", () => {

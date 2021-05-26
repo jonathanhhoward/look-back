@@ -29,8 +29,8 @@ test("title color is 'success' when inspection expires after today", () => {
       initialDate={thirteenDaysAgo.toSQLDate()}
     />
   );
-  const header = screen.getByText("14-day");
-  expect(header).toHaveStyle(`color: ${palette.success.main}`);
+  const title = screen.getByText("14-day");
+  expect(title).toHaveStyle(`color: ${palette.success.main}`);
 });
 
 test("title color is 'warning' when inspection expires today", () => {
@@ -45,8 +45,8 @@ test("title color is 'warning' when inspection expires today", () => {
       initialDate={fourteenDaysAgo.toSQLDate()}
     />
   );
-  const header = screen.getByText("14-day");
-  expect(header).toHaveStyle(`color: ${palette.warning.main}`);
+  const title = screen.getByText("14-day");
+  expect(title).toHaveStyle(`color: ${palette.warning.main}`);
 });
 
 test("title color is 'error' when inspection is expired", () => {
@@ -61,8 +61,8 @@ test("title color is 'error' when inspection is expired", () => {
       initialDate={fifteenDaysAgo.toSQLDate()}
     />
   );
-  const header = screen.getByText("14-day");
-  expect(header).toHaveStyle({
+  const title = screen.getByText("14-day");
+  expect(title).toHaveStyle({
     color: palette.error.contrastText,
     backgroundColor: palette.error.main,
   });
