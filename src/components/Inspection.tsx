@@ -45,6 +45,7 @@ export function Inspection({ title, duration, initialDate }: InspectionProps) {
   const init = initialDate ? DateTime.fromISO(initialDate) : null;
   const [date, setDate] = useState<DateTime | null>(init);
   const status = inspectionStatus(date, duration);
+
   return (
     <Accordion>
       <AccordionSummary
