@@ -37,6 +37,9 @@ const useStyles = makeStyles(({ palette }: Theme) =>
 
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
+  const typeOptions = ["", "MEL", "CDL", "NEF"].map((type) => (
+    <MenuItem key={`type-${type}`}>{type}</MenuItem>
+  ));
 
   return (
     <Accordion>
@@ -62,7 +65,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
               select
               variant="filled"
             >
-              <MenuItem />
+              {typeOptions}
             </TextField>
           </Grid>
           <Grid item xs={9} md={5}>

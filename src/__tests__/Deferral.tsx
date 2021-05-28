@@ -24,6 +24,11 @@ test("renders input to select deferral type", () => {
   userEvent.click(input);
   const select = screen.getByRole("listbox", { name: /^type$/i });
   expect(select).toBeInTheDocument();
+  const choices = ["", "MEL", "CDL", "NEF"];
+  const options = screen.getAllByRole("option");
+  choices.forEach((choice, i) => {
+    expect(options[i].textContent).toBe(choice);
+  });
 });
 
 test("renders input to enter deferral number", () => {
