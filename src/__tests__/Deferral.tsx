@@ -18,9 +18,12 @@ test("renders a subtitle", () => {
   expect(subtitle).toBeInTheDocument();
 });
 
-test("renders input to select type", () => {
+test("renders input to select deferral type", () => {
   const input = screen.getByLabelText(/^type$/i);
   expect(input).toBeInTheDocument();
+  userEvent.click(input);
+  const select = screen.getByRole("listbox", { name: /^type$/i });
+  expect(select).toBeInTheDocument();
 });
 
 test("renders input to enter deferral number", () => {
@@ -31,6 +34,9 @@ test("renders input to enter deferral number", () => {
 test("renders input to select deferral category", () => {
   const input = screen.getByLabelText(/^cat$/i);
   expect(input).toBeInTheDocument();
+  userEvent.click(input);
+  const select = screen.getByRole("listbox", { name: /^cat$/i });
+  expect(select).toBeInTheDocument();
 });
 
 test("renders input to enter deferral duration", () => {
