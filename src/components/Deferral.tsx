@@ -37,8 +37,10 @@ const useStyles = makeStyles(({ palette }: Theme) =>
 
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
-  const typeOptions = ["", "MEL", "CDL", "NEF"].map((type) => (
-    <MenuItem key={`type-${type}`}>{type}</MenuItem>
+  const typeOptions = ["MEL", "CDL", "NEF"].map((type) => (
+    <MenuItem key={`type-${type}`} value={type}>
+      {type}
+    </MenuItem>
   ));
 
   return (
@@ -63,6 +65,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
               id="type"
               label="Type"
               select
+              value=""
               variant="filled"
             >
               {typeOptions}
