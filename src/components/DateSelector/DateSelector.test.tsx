@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { DateSelector } from "components";
+import { DateSelector } from "./DateSelector";
 
 test("renders a datepicker", () => {
   render(

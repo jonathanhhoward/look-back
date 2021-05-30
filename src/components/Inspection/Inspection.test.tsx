@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { DateTime, Duration, Interval } from "luxon";
-import { Inspection } from "components";
+import { Inspection } from "./Inspection";
 
 const { palette } = createMuiTheme();
 

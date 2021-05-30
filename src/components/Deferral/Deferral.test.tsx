@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { Deferral } from "components";
 import userEvent from "@testing-library/user-event";
+import { Deferral } from "./Deferral";
 
 const handleDelete = jest.fn();
 
