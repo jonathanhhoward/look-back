@@ -11,12 +11,10 @@ import { InspectionStatusText } from "./InspectionStatusText";
 interface InspectionProps {
   title: string;
   duration: number;
-  initialDate?: string;
 }
 
-export function Inspection({ title, duration, initialDate }: InspectionProps) {
-  const init = initialDate ? DateTime.fromISO(initialDate) : null;
-  const [date, setDate] = useState<DateTime | null>(init);
+export function Inspection({ title, duration }: InspectionProps) {
+  const [date, setDate] = useState<DateTime | null>(null);
 
   return (
     <Accordion>
