@@ -31,7 +31,7 @@ export function Inspection({ title, duration }: InspectionProps) {
         <DateSelector
           handleChange={setDate}
           label="Inspection Date"
-          pickerId={`inspection-date-${title}`}
+          pickerId={title}
           value={date}
         />
       </AccordionDetails>
