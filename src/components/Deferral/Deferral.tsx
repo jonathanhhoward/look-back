@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { DateSelector } from "components";
+import { DateSelector, IntervalStatusText } from "components";
 
 interface DeferralProps {
   deleteId: string;
@@ -51,7 +51,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
         id="deferral-summary"
       >
         <Typography className={classes.title} variant="subtitle1">
-          New Deferral
+          <IntervalStatusText date={null} duration={0} text="New Deferral" />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
           Item Number
