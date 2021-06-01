@@ -1,31 +1,12 @@
 import Box from "@material-ui/core/Box";
 import { DateTime, Interval } from "luxon";
 
-type InspectionColor = "success.main" | "warning.main" | "error.contrastText";
-type InspectionBgcolor = "error.main" | undefined;
-
-interface InspectionStatus {
-  color: InspectionColor;
-  bgcolor: InspectionBgcolor;
-}
-
-function inspectionStatus(
-  date: DateTime | null,
-  duration: number
-): InspectionStatus | undefined {
-  if (!date) return;
-  const interval = Interval.fromDateTimes(date, DateTime.now());
-  const days = Math.floor(interval.length("days"));
-  const color: InspectionColor =
-    days < duration
-      ? "success.main"
-      : days === duration
-      ? "warning.main"
-      : "error.contrastText";
-  const bgcolor: InspectionBgcolor =
-    color === "error.contrastText" ? "error.main" : undefined;
-  return { color, bgcolor };
-}
+type StatusColor =
+  | "success.main"
+  | "warning.main"
+  | "error.contrastText"
+  | undefined;
+type StatusBgcolor = "error.main" | undefined;
 
 interface IntervalStatusTextProps {
   date: DateTime | null;
@@ -38,10 +19,23 @@ export function InspectionStatusText({
   duration,
   text,
 }: IntervalStatusTextProps) {
-  const status = inspectionStatus(date, duration);
+  let color: StatusColor;
+  let bgcolor: StatusBgcolor;
+  if (date) {
+    const days = Math.floor(
+      Interval.fromDateTimes(date, DateTime.now()).length("days")
+    );
+    color =
+      days < duration
+        ? "success.main"
+        : days === duration
+        ? "warning.main"
+        : "error.contrastText";
+    color === "error.contrastText" && (bgcolor = "error.main");
+  }
 
   return (
-    <Box component="span" color={status?.color} bgcolor={status?.bgcolor}>
+    <Box component="span" color={color} bgcolor={bgcolor}>
       {text}
     </Box>
   );
