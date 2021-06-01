@@ -5,8 +5,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DateTime } from "luxon";
-import { DateSelector } from "components";
-import { InspectionStatusText } from "./InspectionStatusText";
+import { DateSelector, IntervalStatusText } from "components";
 
 interface InspectionProps {
   title: string;
@@ -24,7 +23,7 @@ export function Inspection({ title, duration }: InspectionProps) {
         id="inspection-summary"
       >
         <Typography variant="subtitle1">
-          <InspectionStatusText date={date} duration={duration} text={title} />
+          <IntervalStatusText date={date} duration={duration} text={title} />
         </Typography>
       </AccordionSummary>
       <AccordionDetails>

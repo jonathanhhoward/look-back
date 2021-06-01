@@ -14,7 +14,7 @@ interface IntervalStatusTextProps {
   text: string;
 }
 
-export function InspectionStatusText({
+export function IntervalStatusText({
   date,
   duration,
   text,
