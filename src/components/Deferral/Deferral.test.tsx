@@ -30,27 +30,32 @@ test("renders input to select deferral type", () => {
   expect(options).toStrictEqual(["MEL", "CDL", "NEF"]);
 });
 
-test("renders input to enter deferral number", () => {
+test("renders disabled input to enter deferral number", () => {
   const input = screen.getByLabelText(/^number$/i);
   expect(input).toBeInTheDocument();
+  expect(input).toBeDisabled();
 });
 
-test("renders input to select deferral category", () => {
-  const input = screen.getByLabelText(/^cat$/i);
+test("renders disabled input to select deferral category", () => {
+  const input = screen.getByLabelText(/^category$/i);
   expect(input).toBeInTheDocument();
   userEvent.click(input);
-  const select = screen.getByRole("listbox", { name: /^cat$/i });
-  expect(select).toBeInTheDocument();
+  const select = screen.queryByRole("listbox", { name: /^category$/i });
+  expect(select).not.toBeInTheDocument();
 });
 
-test("renders input to enter deferral duration", () => {
-  const input = screen.getByLabelText(/^days$/i);
+test("renders disabled input to enter deferral duration", () => {
+  const input = screen.getByLabelText(/^duration$/i);
   expect(input).toBeInTheDocument();
+  expect(input).toBeDisabled();
 });
 
-test("renders a datepicker", () => {
+test("renders a disabled datepicker", () => {
   const datepicker = screen.getByLabelText(/^deferral date$/i);
   expect(datepicker).toBeInTheDocument();
+  userEvent.click(datepicker);
+  const dialog = screen.queryAllByRole("dialog");
+  expect(dialog).toHaveLength(0);
 });
 
 test("renders a delete button", () => {

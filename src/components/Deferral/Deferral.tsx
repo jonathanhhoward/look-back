@@ -59,7 +59,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
-          <Grid item xs={3} md={1}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
               id="type"
@@ -71,19 +71,21 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
               {typeOptions}
             </TextField>
           </Grid>
-          <Grid item xs={9} md={5}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
+              disabled
               id="number"
               label="Number"
               variant="filled"
             />
           </Grid>
-          <Grid item xs={5} md={2}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.splitInput}
+              disabled
               id="category"
-              label="Cat"
+              label="Category"
               select
               variant="filled"
             >
@@ -91,15 +93,17 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
             </TextField>
             <TextField
               className={classes.splitInput}
+              disabled
               id="duration"
               inputProps={{ min: "1" }}
-              label="Days"
+              label="Duration"
               type="number"
               variant="filled"
             />
           </Grid>
-          <Grid item xs={7} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <DateSelector
+              disabled
               handleChange={() => {}}
               label="Deferral Date"
               pickerId="deferral-date"

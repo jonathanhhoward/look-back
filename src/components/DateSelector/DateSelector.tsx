@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import LuxonUtils from "@date-io/luxon";
 
 interface DateSelectorProps {
+  disabled?: boolean;
   handleChange: (date: MaterialUiPickersDate) => void;
   label: string;
   pickerId: string;
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 });
 
 export function DateSelector({
+  disabled,
   handleChange,
   label,
   pickerId,
@@ -34,6 +36,7 @@ export function DateSelector({
     <MuiPickersUtilsProvider utils={LuxonUtils}>
       <DatePicker
         className={classes.datepicker}
+        disabled={disabled}
         disableFuture
         disableToolbar
         format="MM/dd/yyyy"
