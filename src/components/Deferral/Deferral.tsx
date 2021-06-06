@@ -1,4 +1,4 @@
-import { ReactEventHandler } from "react";
+import { ChangeEvent, ReactEventHandler, useState } from "react";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionActions from "@material-ui/core/AccordionActions";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -12,10 +12,18 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { DateSelector, IntervalStatusText } from "components";
+import { DateTime } from "luxon";
 
 interface DeferralProps {
   deleteId: string;
   handleDelete: ReactEventHandler;
+}
+
+interface DeferralState {
+  type: string;
+  number: string;
+  category: string;
+  duration: string;
 }
 
 const useStyles = makeStyles(({ palette }: Theme) =>
@@ -35,13 +43,44 @@ const useStyles = makeStyles(({ palette }: Theme) =>
   })
 );
 
+function isEmpty(s: string) {
+  return s === "";
+}
+
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
+  const [title, setTitle] = useState("New Deferral");
+  const [subtitle, setSubtitle] = useState("Item Number");
+  const [deferral, setDeferral] = useState<DeferralState>({
+    type: "",
+    number: "",
+    category: "",
+    duration: "",
+  });
+  const [date, setDate] = useState<DateTime | null>(null);
   const typeOptions = ["MEL", "CDL", "NEF"].map((type) => (
     <MenuItem key={type} value={type}>
       {type}
     </MenuItem>
   ));
+
+  function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
+    setTitle(event.target.value);
+    setDeferral({ ...deferral, type: event.target.value });
+  }
+
+  function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
+    setSubtitle(event.target.value);
+    setDeferral({ ...deferral, number: event.target.value });
+  }
+
+  function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
+    setDeferral({ ...deferral, category: event.target.value });
+  }
+
+  function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
+    setDeferral({ ...deferral, duration: event.target.value });
+  }
 
   return (
     <Accordion>
@@ -51,10 +90,14 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
         id="deferral-summary"
       >
         <Typography className={classes.title} variant="subtitle1">
-          <IntervalStatusText date={null} duration={0} text="New Deferral" />
+          <IntervalStatusText
+            date={date}
+            duration={Number(deferral.duration)}
+            text={title}
+          />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
-          Item Number
+          {subtitle}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -64,8 +107,9 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
               className={classes.input}
               id="type"
               label="Type"
+              onChange={handleChangeType}
               select
-              value=""
+              value={deferral.type}
               variant="filled"
             >
               {typeOptions}
@@ -74,40 +118,46 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
-              disabled
+              disabled={isEmpty(deferral.type)}
               id="number"
               label="Number"
+              onChange={handleChangeNumber}
+              value={deferral.number}
               variant="filled"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.splitInput}
-              disabled
+              disabled={isEmpty(deferral.number)}
               id="category"
               label="Category"
+              onChange={handleChangeCategory}
               select
+              value={deferral.category}
               variant="filled"
             >
-              <MenuItem />
+              <MenuItem value="A">A</MenuItem>
             </TextField>
             <TextField
               className={classes.splitInput}
-              disabled
+              disabled={isEmpty(deferral.category)}
               id="duration"
               inputProps={{ min: "1" }}
               label="Duration"
+              onChange={handleChangeDuration}
               type="number"
+              value={deferral.duration}
               variant="filled"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
-              disabled
-              handleChange={() => {}}
+              disabled={isEmpty(deferral.duration)}
+              handleChange={setDate}
               label="Deferral Date"
               pickerId="deferral-date"
-              value={null}
+              value={date}
               width="100%"
             />
           </Grid>
