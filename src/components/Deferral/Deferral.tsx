@@ -20,11 +20,12 @@ interface DeferralProps {
 }
 
 type DeferralType = "MEL" | "CDL" | "NEF";
+type DeferralCategory = "A" | "B" | "C" | "D";
 
 interface DeferralState {
   type: DeferralType | "";
   number: string;
-  category: string;
+  category: DeferralCategory | "";
   duration: string;
 }
 
@@ -66,7 +67,8 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
       {type}
     </MenuItem>
   ));
-  const categoryOptions = ["A", "B", "C", "D"].map((category) => (
+  const categories: DeferralCategory[] = ["A", "B", "C", "D"];
+  const categoryOptions = categories.map((category) => (
     <MenuItem key={category} value={category}>
       {category}
     </MenuItem>
@@ -83,7 +85,10 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
-    setDeferral({ ...deferral, category: event.target.value });
+    setDeferral({
+      ...deferral,
+      category: event.target.value as DeferralCategory,
+    });
   }
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
