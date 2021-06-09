@@ -19,8 +19,10 @@ interface DeferralProps {
   handleDelete: ReactEventHandler;
 }
 
+type DeferralType = "MEL" | "CDL" | "NEF";
+
 interface DeferralState {
-  type: string;
+  type: DeferralType | "";
   number: string;
   category: string;
   duration: string;
@@ -58,7 +60,8 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
     duration: "",
   });
   const [date, setDate] = useState<DateTime | null>(null);
-  const typeOptions = ["MEL", "CDL", "NEF"].map((type) => (
+  const types: DeferralType[] = ["MEL", "CDL", "NEF"];
+  const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
     </MenuItem>
@@ -66,7 +69,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
-    setDeferral({ ...deferral, type: event.target.value });
+    setDeferral({ ...deferral, type: event.target.value as DeferralType });
   }
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
