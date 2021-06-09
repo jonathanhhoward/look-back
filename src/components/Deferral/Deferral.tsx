@@ -66,6 +66,11 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
       {type}
     </MenuItem>
   ));
+  const categoryOptions = ["A", "B", "C", "D"].map((category) => (
+    <MenuItem key={category} value={category}>
+      {category}
+    </MenuItem>
+  ));
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
@@ -140,7 +145,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
               value={deferral.category}
               variant="filled"
             >
-              <MenuItem value="A">A</MenuItem>
+              {categoryOptions}
             </TextField>
             <TextField
               className={classes.splitInput}

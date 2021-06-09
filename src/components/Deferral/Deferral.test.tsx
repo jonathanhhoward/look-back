@@ -88,6 +88,11 @@ test("inputting values enables the next input and updates title and subtitle", (
   const category = screen.getByLabelText(/^category$/i);
   userEvent.click(category);
   const categorySelect = screen.getByRole("listbox", { name: /^category$/i });
+  expect(categorySelect).toBeInTheDocument();
+  const categoryOptions = screen
+    .getAllByRole("option")
+    .map((option: HTMLOptionElement) => option.textContent);
+  expect(categoryOptions).toStrictEqual(["A", "B", "C", "D"]);
   const categoryOption = screen.getByRole("option", { name: /^a$/i });
   userEvent.selectOptions(categorySelect, categoryOption);
 
