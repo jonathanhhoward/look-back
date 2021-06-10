@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { DateSelector, IntervalStatusText } from "components";
 import { DateTime } from "luxon";
 
@@ -50,10 +50,6 @@ const useStyles = makeStyles(({ palette }: Theme) =>
     },
   })
 );
-
-function isEmpty(s: string) {
-  return s === "";
-}
 
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
@@ -143,7 +139,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
-              disabled={isEmpty(deferral.type)}
+              disabled={!deferral.type}
               id="number"
               label="Number"
               onChange={handleChangeNumber}
@@ -154,7 +150,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.splitInput}
-              disabled={isEmpty(deferral.number)}
+              disabled={!deferral.number}
               id="category"
               label="Category"
               onChange={handleChangeCategory}
@@ -178,7 +174,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
-              disabled={isEmpty(deferral.duration)}
+              disabled={!deferral.duration}
               handleChange={setDate}
               label="Deferral Date"
               pickerId="deferral-date"
