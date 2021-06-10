@@ -20,7 +20,7 @@ interface DeferralProps {
 }
 
 type DeferralType = "MEL" | "CDL" | "NEF";
-type DeferralCategory = "A" | "B" | "C" | "D";
+type DeferralCategory = "A" | "B" | "C" | "D" | "P" | "CDL";
 
 interface DeferralState {
   type: DeferralType | "";
@@ -68,7 +68,12 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
       {type}
     </MenuItem>
   ));
-  const categories: DeferralCategory[] = ["A", "B", "C", "D"];
+  const typeMap = new Map<DeferralType, DeferralCategory[]>([
+    ["MEL", ["A", "B", "C", "D"]],
+    ["CDL", ["CDL"]],
+    ["NEF", ["P"]],
+  ]);
+  const categories = deferral.type ? typeMap.get(deferral.type) || [""] : [""];
   const categoryOptions = categories.map((category) => (
     <MenuItem key={category} value={category}>
       {category}
@@ -79,6 +84,8 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
     ["B", { value: "3", disabled: true }],
     ["C", { value: "10", disabled: true }],
     ["D", { value: "120", disabled: true }],
+    ["P", { value: "120", disabled: false }],
+    ["CDL", { value: "120", disabled: false }],
   ]);
   const durationDisabled =
     !deferral.category || categoryMap.get(deferral.category)?.disabled;
