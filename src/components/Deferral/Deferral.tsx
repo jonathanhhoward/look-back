@@ -73,12 +73,16 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
     ["CDL", ["CDL"]],
     ["NEF", ["P"]],
   ]);
-  const categories = deferral.type ? typeMap.get(deferral.type) || [""] : [""];
-  const categoryOptions = categories.map((category) => (
-    <MenuItem key={category} value={category}>
-      {category}
-    </MenuItem>
-  ));
+  const categories = deferral.type ? typeMap.get(deferral.type) : undefined;
+  const categoryOptions = categories ? (
+    categories.map((category) => (
+      <MenuItem key={category} value={category}>
+        {category}
+      </MenuItem>
+    ))
+  ) : (
+    <MenuItem />
+  );
   const categoryMap = new Map<DeferralCategory, DurationProps>([
     ["A", { value: "", disabled: false }],
     ["B", { value: "3", disabled: true }],
