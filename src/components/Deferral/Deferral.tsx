@@ -29,6 +29,11 @@ interface DeferralState {
   duration: string;
 }
 
+interface DurationProps {
+  value: "" | "3" | "10" | "120";
+  disabled: boolean;
+}
+
 const useStyles = makeStyles(({ palette }: Theme) =>
   createStyles({
     title: {
@@ -73,6 +78,14 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
       {category}
     </MenuItem>
   ));
+  const categoryMap = new Map<DeferralCategory, DurationProps>([
+    ["A", { value: "", disabled: false }],
+    ["B", { value: "3", disabled: true }],
+    ["C", { value: "10", disabled: true }],
+    ["D", { value: "120", disabled: true }],
+  ]);
+  const durationDisabled =
+    !deferral.category || categoryMap.get(deferral.category)?.disabled;
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
@@ -85,10 +98,9 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
-    setDeferral({
-      ...deferral,
-      category: event.target.value as DeferralCategory,
-    });
+    const category = event.target.value as DeferralCategory;
+    const duration = categoryMap.get(category)?.value || "";
+    setDeferral({ ...deferral, category, duration });
   }
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
@@ -154,7 +166,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
             </TextField>
             <TextField
               className={classes.splitInput}
-              disabled={isEmpty(deferral.category)}
+              disabled={durationDisabled}
               id="duration"
               inputProps={{ min: "1" }}
               label="Duration"
