@@ -51,6 +51,21 @@ const useStyles = makeStyles(({ palette }: Theme) =>
   })
 );
 
+const types: DeferralType[] = ["MEL", "CDL", "NEF"];
+const typeMap = new Map<DeferralType, DeferralCategory[]>([
+  ["MEL", ["A", "B", "C", "D"]],
+  ["CDL", ["CDL"]],
+  ["NEF", ["P"]],
+]);
+const categoryMap = new Map<DeferralCategory, DurationProps>([
+  ["A", { value: "", disabled: false }],
+  ["B", { value: "3", disabled: true }],
+  ["C", { value: "10", disabled: true }],
+  ["D", { value: "120", disabled: true }],
+  ["P", { value: "120", disabled: false }],
+  ["CDL", { value: "120", disabled: false }],
+]);
+
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
   const [title, setTitle] = useState("New Deferral");
@@ -62,17 +77,11 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
     duration: "",
   });
   const [date, setDate] = useState<DateTime | null>(null);
-  const types: DeferralType[] = ["MEL", "CDL", "NEF"];
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
     </MenuItem>
   ));
-  const typeMap = new Map<DeferralType, DeferralCategory[]>([
-    ["MEL", ["A", "B", "C", "D"]],
-    ["CDL", ["CDL"]],
-    ["NEF", ["P"]],
-  ]);
   const categories = deferral.type ? typeMap.get(deferral.type) : undefined;
   const categoryOptions = categories ? (
     categories.map((category) => (
@@ -83,14 +92,6 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   ) : (
     <MenuItem />
   );
-  const categoryMap = new Map<DeferralCategory, DurationProps>([
-    ["A", { value: "", disabled: false }],
-    ["B", { value: "3", disabled: true }],
-    ["C", { value: "10", disabled: true }],
-    ["D", { value: "120", disabled: true }],
-    ["P", { value: "120", disabled: false }],
-    ["CDL", { value: "120", disabled: false }],
-  ]);
   const durationDisabled =
     !deferral.category || categoryMap.get(deferral.category)?.disabled;
 
