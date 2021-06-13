@@ -43,7 +43,7 @@ test("renders disabled input to select deferral category", () => {
   expect(input).toBeInTheDocument();
   userEvent.click(input);
   const select = screen.queryByRole("listbox", { name: /^category$/i });
-  expect(select).not.toBeInTheDocument();
+  expect(select).toBeNull();
 });
 
 test("renders disabled input to enter deferral duration", () => {
@@ -57,7 +57,7 @@ test("renders a disabled datepicker", () => {
   expect(datepicker).toBeInTheDocument();
   userEvent.click(datepicker);
   const dialog = screen.queryAllByRole("dialog");
-  expect(dialog).toHaveLength(0);
+  expect(dialog).toStrictEqual([]);
 });
 
 test("renders a delete button", () => {
