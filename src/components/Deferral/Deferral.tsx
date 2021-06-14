@@ -109,7 +109,10 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   }
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
-    setDeferral({ ...deferral, duration: event.target.value });
+    const value = event.target.value;
+    const duration =
+      Number(value) < 1 ? "1" : Math.floor(Number(value)).toString();
+    setDeferral({ ...deferral, duration });
   }
 
   return (

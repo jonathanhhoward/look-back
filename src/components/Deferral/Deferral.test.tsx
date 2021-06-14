@@ -99,6 +99,8 @@ test("inputting values enables the next input and updates title and subtitle", (
   // then enter duration
   const duration = screen.getByLabelText(/^duration$/i);
   expect(duration).toBeEnabled();
+  userEvent.type(duration, "0");
+  expect((duration as HTMLInputElement).value).toStrictEqual("1");
   userEvent.type(duration, "14");
 
   // then pick date
