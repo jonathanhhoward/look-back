@@ -68,7 +68,7 @@ test("renders a delete button", () => {
 });
 
 test("inputting values enables the next input and updates title and subtitle", () => {
-  // select type
+  // first select type
   const title = screen.getByText(/^new deferral$/i);
   const type = screen.getByLabelText(/^type$/i);
   userEvent.click(type);
@@ -77,14 +77,14 @@ test("inputting values enables the next input and updates title and subtitle", (
   userEvent.selectOptions(typeSelect, typeOption);
   expect(title).toHaveTextContent(/^mel$/i);
 
-  // enter number
+  // then enter number
   const subtitle = screen.getByText(/^item number$/i);
   const number = screen.getByLabelText(/^number$/i);
   expect(number).toBeEnabled();
   userEvent.type(number, "10-10-10-10");
   expect(subtitle).toHaveTextContent(/^10-10-10-10$/i);
 
-  // select category
+  // then select category
   const category = screen.getByLabelText(/^category$/i);
   userEvent.click(category);
   const categorySelect = screen.getByRole("listbox", { name: /^category$/i });
@@ -96,12 +96,12 @@ test("inputting values enables the next input and updates title and subtitle", (
   const categoryOption = screen.getByRole("option", { name: /^a$/i });
   userEvent.selectOptions(categorySelect, categoryOption);
 
-  // enter duration
+  // then enter duration
   const duration = screen.getByLabelText(/^duration$/i);
   expect(duration).toBeEnabled();
   userEvent.type(duration, "14");
 
-  // pick date
+  // then pick date
   const datepicker = screen.getByLabelText(/^deferral date$/i);
   userEvent.click(datepicker);
   const dialog = screen.queryAllByRole("dialog");
@@ -109,7 +109,7 @@ test("inputting values enables the next input and updates title and subtitle", (
   userEvent.keyboard("{enter}");
   expect(title).toHaveStyle(`color: ${palette.success.main}`);
 
-  // select new type
+  // select new type resets category, duration, and date
   userEvent.click(type);
   typeOption = screen.getByRole("option", { name: /^cdl$/i });
   userEvent.selectOptions(typeSelect, typeOption);
