@@ -73,7 +73,7 @@ test("inputting values enables the next input and updates title and subtitle", (
   const type = screen.getByLabelText(/^type$/i);
   userEvent.click(type);
   const typeSelect = screen.getByRole("listbox", { name: /^type$/i });
-  const typeOption = screen.getByRole("option", { name: /^mel$/i });
+  let typeOption = screen.getByRole("option", { name: /^mel$/i });
   userEvent.selectOptions(typeSelect, typeOption);
   expect(title).toHaveTextContent(/^mel$/i);
 
@@ -89,7 +89,7 @@ test("inputting values enables the next input and updates title and subtitle", (
   userEvent.click(category);
   const categorySelect = screen.getByRole("listbox", { name: /^category$/i });
   expect(categorySelect).toBeInTheDocument();
-  const categoryOptions = screen
+  let categoryOptions = screen
     .getAllByRole("option")
     .map((option: HTMLOptionElement) => option.textContent);
   expect(categoryOptions).toStrictEqual(["A", "B", "C", "D"]);
@@ -108,4 +108,18 @@ test("inputting values enables the next input and updates title and subtitle", (
   expect(dialog).not.toHaveLength(0);
   userEvent.keyboard("{enter}");
   expect(title).toHaveStyle(`color: ${palette.success.main}`);
+
+  // select new type
+  userEvent.click(type);
+  typeOption = screen.getByRole("option", { name: /^cdl$/i });
+  userEvent.selectOptions(typeSelect, typeOption);
+  expect(title).toHaveTextContent(/^cdl$/i);
+  expect(title).toHaveStyle("color: initial");
+  userEvent.click(category);
+  categoryOptions = screen
+    .getAllByRole("option")
+    .map((option: HTMLOptionElement) => option.textContent);
+  expect(categoryOptions).toStrictEqual(["CDL"]);
+  expect((duration as HTMLInputElement).value).toStrictEqual("");
+  expect(duration).toBeDisabled();
 });

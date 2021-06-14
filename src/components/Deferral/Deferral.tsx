@@ -97,7 +97,13 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
-    setDeferral({ ...deferral, type: event.target.value as DeferralType });
+    setDeferral({
+      ...deferral,
+      type: event.target.value as DeferralType,
+      category: "",
+      duration: "",
+    });
+    setDate(null);
   }
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
