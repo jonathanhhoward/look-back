@@ -29,7 +29,7 @@ interface DeferralState {
   duration: string;
 }
 
-interface DurationProps {
+interface DurationAttributes {
   value: "" | "3" | "10" | "120";
   disabled: boolean;
 }
@@ -57,7 +57,7 @@ const typeMap = new Map<DeferralType, DeferralCategory[]>([
   ["CDL", ["CDL"]],
   ["NEF", ["P"]],
 ]);
-const categoryMap = new Map<DeferralCategory, DurationProps>([
+const categoryMap = new Map<DeferralCategory, DurationAttributes>([
   ["A", { value: "", disabled: false }],
   ["B", { value: "3", disabled: true }],
   ["C", { value: "10", disabled: true }],
