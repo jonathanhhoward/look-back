@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactEventHandler, useState } from "react";
+import { DateTime } from "luxon";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionActions from "@material-ui/core/AccordionActions";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -12,26 +13,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { DateSelector, IntervalStatusText } from "components";
-import { DateTime } from "luxon";
+import {
+  DeferralCategory,
+  DeferralState,
+  DeferralType,
+  DurationAttributes,
+} from "./types";
 
 interface DeferralProps {
   deleteId: string;
   handleDelete: ReactEventHandler;
-}
-
-type DeferralType = "MEL" | "CDL" | "NEF";
-type DeferralCategory = "A" | "B" | "C" | "D" | "P" | "CDL";
-
-interface DeferralState {
-  type: DeferralType | "";
-  number: string;
-  category: DeferralCategory | "";
-  duration: string;
-}
-
-interface DurationAttributes {
-  value: "" | "3" | "10" | "120";
-  disabled: boolean;
 }
 
 const useStyles = makeStyles(({ palette }: Theme) =>
