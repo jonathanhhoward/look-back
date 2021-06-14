@@ -68,8 +68,8 @@ const categoryMap = new Map<DeferralCategory, DurationProps>([
 
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
-  const [title, setTitle] = useState("New Deferral");
-  const [subtitle, setSubtitle] = useState("Item Number");
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
   const [deferral, setDeferral] = useState<DeferralState>({
     type: "",
     number: "",
@@ -132,11 +132,11 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           <IntervalStatusText
             date={date}
             duration={Number(deferral.duration)}
-            text={title}
+            text={title || "Deferral Type"}
           />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
-          {subtitle}
+          {subtitle || "Deferral Number"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>

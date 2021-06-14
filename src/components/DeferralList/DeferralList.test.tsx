@@ -19,7 +19,7 @@ test("renders an add button", () => {
 test("renders new deferral on add button click", () => {
   const button = screen.getByLabelText(/^add deferral$/i);
   userEvent.click(button);
-  const deferral = screen.getByText(/^new deferral$/i);
+  const deferral = screen.getByText(/^deferral type$/i);
   expect(deferral).toBeInTheDocument();
 });
 

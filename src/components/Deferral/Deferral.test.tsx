@@ -11,12 +11,12 @@ beforeEach(() => {
 });
 
 test("renders the title", () => {
-  const title = screen.getByText(/^new deferral$/i);
+  const title = screen.getByText(/^deferral type$/i);
   expect(title).toBeInTheDocument();
 });
 
 test("renders a subtitle", () => {
-  const subtitle = screen.getByText(/^item number$/i);
+  const subtitle = screen.getByText(/^deferral number$/i);
   expect(subtitle).toBeInTheDocument();
 });
 
@@ -69,7 +69,7 @@ test("renders a delete button", () => {
 
 test("inputting values enables the next input and updates title and subtitle", () => {
   // first select type
-  const title = screen.getByText(/^new deferral$/i);
+  const title = screen.getByText(/^deferral type$/i);
   const type = screen.getByLabelText(/^type$/i);
   userEvent.click(type);
   const typeSelect = screen.getByRole("listbox", { name: /^type$/i });
@@ -78,7 +78,7 @@ test("inputting values enables the next input and updates title and subtitle", (
   expect(title).toHaveTextContent(/^mel$/i);
 
   // then enter number
-  const subtitle = screen.getByText(/^item number$/i);
+  const subtitle = screen.getByText(/^deferral number$/i);
   const number = screen.getByLabelText(/^number$/i);
   expect(number).toBeEnabled();
   userEvent.type(number, "10-10-10-10");
