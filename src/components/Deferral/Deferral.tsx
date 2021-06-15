@@ -1,5 +1,5 @@
 import { ChangeEvent, ReactEventHandler, useState } from "react";
-import { DateTime } from "luxon";
+import { Dayjs } from "dayjs";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionActions from "@material-ui/core/AccordionActions";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -67,7 +67,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
     category: "",
     duration: "",
   });
-  const [date, setDate] = useState<DateTime | null>(null);
+  const [date, setDate] = useState<Dayjs | null>(null);
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}

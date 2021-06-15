@@ -1,5 +1,5 @@
 import Box from "@material-ui/core/Box";
-import { DateTime, Interval } from "luxon";
+import dayjs, { Dayjs } from "dayjs";
 
 type StatusColor =
   | "success.main"
@@ -9,7 +9,7 @@ type StatusColor =
 type StatusBgcolor = "error.main" | undefined;
 
 interface IntervalStatusTextProps {
-  date: DateTime | null;
+  date: Dayjs | null;
   duration: number;
   text: string;
 }
@@ -22,9 +22,7 @@ export function IntervalStatusText({
   let color: StatusColor;
   let bgcolor: StatusBgcolor;
   if (date) {
-    const days = Math.floor(
-      Interval.fromDateTimes(date, DateTime.now()).length("days")
-    );
+    const days = dayjs().diff(date, "days");
     color =
       days < duration
         ? "success.main"

@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { Dayjs } from "dayjs";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DateTime } from "luxon";
 import { DateSelector, IntervalStatusText } from "components";
 
 interface InspectionProps {
@@ -13,7 +13,7 @@ interface InspectionProps {
 }
 
 export function Inspection({ title, duration }: InspectionProps) {
-  const [date, setDate] = useState<DateTime | null>(null);
+  const [date, setDate] = useState<Dayjs | null>(null);
 
   return (
     <Accordion>
