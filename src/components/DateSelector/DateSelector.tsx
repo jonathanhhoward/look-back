@@ -6,6 +6,7 @@ import DayjsUtils from "@date-io/dayjs";
 interface DateSelectorProps {
   disabled?: boolean;
   label: string;
+  onAccept: (date: MaterialUiPickersDate) => void;
   onChange: (date: MaterialUiPickersDate) => void;
   pickerId: string;
   value: MaterialUiPickersDate;
@@ -24,8 +25,9 @@ const useStyles = makeStyles({
 
 export function DateSelector({
   disabled,
-  onChange,
   label,
+  onAccept,
+  onChange,
   pickerId,
   value,
   width,
@@ -44,6 +46,7 @@ export function DateSelector({
         id={pickerId}
         inputVariant="filled"
         label={label}
+        onAccept={onAccept}
         onChange={onChange}
         value={value}
       />

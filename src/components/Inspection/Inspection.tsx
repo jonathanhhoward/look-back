@@ -14,9 +14,18 @@ interface InspectionProps {
 
 export function Inspection({ title, duration }: InspectionProps) {
   const [date, setDate] = useState<Dayjs | null>(null);
+  const [expanded, setExpanded] = useState(true);
+
+  function handleChangeExpanded(_event: any, isExpanded: boolean) {
+    setExpanded(isExpanded);
+  }
+
+  function handleAcceptDate(_date: any) {
+    setExpanded(false);
+  }
 
   return (
-    <Accordion>
+    <Accordion expanded={expanded} onChange={handleChangeExpanded}>
       <AccordionSummary
         aria-controls="inspection-details"
         expandIcon={<ExpandMoreIcon />}
@@ -29,6 +38,7 @@ export function Inspection({ title, duration }: InspectionProps) {
       <AccordionDetails>
         <DateSelector
           label="Inspection Date"
+          onAccept={handleAcceptDate}
           onChange={setDate}
           pickerId={title}
           value={date}

@@ -59,6 +59,7 @@ const categoryMap = new Map<DeferralCategory, DurationAttributes>([
 
 export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   const classes = useStyles();
+  const [expanded, setExpanded] = useState(true);
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [deferral, setDeferral] = useState<DeferralState>({
@@ -85,6 +86,14 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   );
   const durationDisabled =
     !deferral.category || categoryMap.get(deferral.category)?.disabled;
+
+  function handleChangeExpanded(_event: any, isExpanded: boolean) {
+    setExpanded(isExpanded);
+  }
+
+  function handleAcceptDate(_date: any) {
+    setExpanded(false);
+  }
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
@@ -116,7 +125,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
   }
 
   return (
-    <Accordion>
+    <Accordion expanded={expanded} onChange={handleChangeExpanded}>
       <AccordionSummary
         aria-controls="deferral-details"
         expandIcon={<ExpandMoreIcon />}
@@ -188,6 +197,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
             <DateSelector
               disabled={!deferral.duration}
               label="Deferral Date"
+              onAccept={handleAcceptDate}
               onChange={setDate}
               pickerId="deferral-date"
               value={date}

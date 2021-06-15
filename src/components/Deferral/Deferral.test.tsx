@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { Deferral } from "./Deferral";
@@ -22,7 +22,7 @@ test("renders a subtitle", () => {
 
 test("renders input to select deferral type", () => {
   const input = screen.getByLabelText(/^type$/i);
-  expect(input).toBeInTheDocument();
+  expect(input).toBeVisible();
   userEvent.click(input);
   const select = screen.getByRole("listbox", { name: /^type$/i });
   expect(select).toBeInTheDocument();
@@ -34,13 +34,13 @@ test("renders input to select deferral type", () => {
 
 test("renders disabled input to enter deferral number", () => {
   const input = screen.getByLabelText(/^number$/i);
-  expect(input).toBeInTheDocument();
+  expect(input).toBeVisible();
   expect(input).toBeDisabled();
 });
 
 test("renders disabled input to select deferral category", () => {
   const input = screen.getByLabelText(/^category$/i);
-  expect(input).toBeInTheDocument();
+  expect(input).toBeVisible();
   userEvent.click(input);
   const select = screen.queryByRole("listbox", { name: /^category$/i });
   expect(select).toBeNull();
@@ -48,13 +48,13 @@ test("renders disabled input to select deferral category", () => {
 
 test("renders disabled input to enter deferral duration", () => {
   const input = screen.getByLabelText(/^duration$/i);
-  expect(input).toBeInTheDocument();
+  expect(input).toBeVisible();
   expect(input).toBeDisabled();
 });
 
 test("renders a disabled datepicker", () => {
   const datepicker = screen.getByLabelText(/^deferral date$/i);
-  expect(datepicker).toBeInTheDocument();
+  expect(datepicker).toBeVisible();
   userEvent.click(datepicker);
   const dialog = screen.queryAllByRole("dialog");
   expect(dialog).toStrictEqual([]);
@@ -67,12 +67,12 @@ test("renders a delete button", () => {
   expect(handleDelete).toHaveBeenCalled();
 });
 
-test("inputting values enables the next input and updates title and subtitle", () => {
+test("inputting values enables the next input and updates title and subtitle", async () => {
   // first select type
   const title = screen.getByText(/^deferral type$/i);
   const type = screen.getByLabelText(/^type$/i);
   userEvent.click(type);
-  const typeSelect = screen.getByRole("listbox", { name: /^type$/i });
+  let typeSelect = screen.getByRole("listbox", { name: /^type$/i });
   let typeOption = screen.getByRole("option", { name: /^mel$/i });
   userEvent.selectOptions(typeSelect, typeOption);
   expect(title).toHaveTextContent(/^mel$/i);
@@ -109,10 +109,14 @@ test("inputting values enables the next input and updates title and subtitle", (
   const dialog = screen.queryAllByRole("dialog");
   expect(dialog).not.toHaveLength(0);
   userEvent.keyboard("{enter}");
+  await waitFor(() => expect(datepicker).not.toBeVisible());
   expect(title).toHaveStyle(`color: ${palette.success.main}`);
 
   // select new type resets category, duration, and date
+  userEvent.click(title);
+  await waitFor(() => expect(type).toBeVisible());
   userEvent.click(type);
+  typeSelect = screen.getByRole("listbox", { name: /^type$/i });
   typeOption = screen.getByRole("option", { name: /^cdl$/i });
   userEvent.selectOptions(typeSelect, typeOption);
   expect(title).toHaveTextContent(/^cdl$/i);

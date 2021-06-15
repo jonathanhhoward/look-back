@@ -1,14 +1,27 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { Inspection } from "./Inspection";
+import userEvent from "@testing-library/user-event";
+
+beforeEach(() => {
+  render(<Inspection title="Title" duration={1} />);
+});
 
 test("renders the inspection title", () => {
-  render(<Inspection title="Title" duration={1} />);
   const title = screen.getByText("Title");
   expect(title).toHaveTextContent("Title");
 });
 
 test("renders a datepicker", () => {
-  render(<Inspection title="Title" duration={1} />);
   const datepicker = screen.getByLabelText(/^inspection date$/i);
-  expect(datepicker).toBeInTheDocument();
+  expect(datepicker).toBeVisible();
+});
+
+test("hides form on date select", async () => {
+  const title = screen.getByText(/^title$/i);
+  const datepicker = screen.getByLabelText(/^inspection date$/i);
+  userEvent.click(datepicker);
+  userEvent.keyboard("{enter}");
+  await waitFor(() => expect(datepicker).not.toBeVisible());
+  userEvent.click(title);
+  await waitFor(() => expect(datepicker).toBeVisible());
 });
