@@ -187,8 +187,8 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
               disabled={!deferral.duration}
-              handleChange={setDate}
               label="Deferral Date"
+              onChange={setDate}
               pickerId="deferral-date"
               value={date}
               width="100%"

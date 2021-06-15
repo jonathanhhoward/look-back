@@ -4,7 +4,7 @@ import { DateSelector } from "./DateSelector";
 test("renders a datepicker", () => {
   render(
     <DateSelector
-      handleChange={jest.fn()}
+      onChange={jest.fn()}
       label="picker label"
       pickerId="picker"
       value=""

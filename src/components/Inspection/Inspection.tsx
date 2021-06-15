@@ -28,8 +28,8 @@ export function Inspection({ title, duration }: InspectionProps) {
       </AccordionSummary>
       <AccordionDetails>
         <DateSelector
-          handleChange={setDate}
           label="Inspection Date"
+          onChange={setDate}
           pickerId={title}
           value={date}
         />
