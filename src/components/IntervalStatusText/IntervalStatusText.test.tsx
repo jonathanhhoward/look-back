@@ -1,15 +1,12 @@
 import { render, screen } from "@testing-library/react";
+import dayjs from "dayjs";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { DateTime, Duration, Interval } from "luxon";
 import { IntervalStatusText } from "./IntervalStatusText";
 
 const { palette } = createMuiTheme();
 
 test("text color is 'success' when inspection expires after today", () => {
-  const thirteenDaysAgo = Interval.before(
-    DateTime.now(),
-    Duration.fromISO("P13D")
-  ).start;
+  const thirteenDaysAgo = dayjs().subtract(13, "day");
   render(
     <IntervalStatusText date={thirteenDaysAgo} duration={14} text="14-day" />
   );
@@ -18,10 +15,7 @@ test("text color is 'success' when inspection expires after today", () => {
 });
 
 test("title color is 'warning' when inspection expires today", () => {
-  const fourteenDaysAgo = Interval.before(
-    DateTime.now(),
-    Duration.fromISO("P14D")
-  ).start;
+  const fourteenDaysAgo = dayjs().subtract(14, "day");
   render(
     <IntervalStatusText date={fourteenDaysAgo} duration={14} text="14-day" />
   );
@@ -30,10 +24,7 @@ test("title color is 'warning' when inspection expires today", () => {
 });
 
 test("title color is 'error' when inspection is expired", () => {
-  const fifteenDaysAgo = Interval.before(
-    DateTime.now(),
-    Duration.fromISO("P15D")
-  ).start;
+  const fifteenDaysAgo = dayjs().subtract(15, "day");
   render(
     <IntervalStatusText date={fifteenDaysAgo} duration={14} text="14-day" />
   );
