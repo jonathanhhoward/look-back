@@ -35,6 +35,7 @@ export function DateSelector({
   return (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
       <DatePicker
+        autoOk
         className={classes.datepicker}
         disabled={disabled}
         disableFuture
