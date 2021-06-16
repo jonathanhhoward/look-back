@@ -29,7 +29,8 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/components/**/*.{ts,tsx}"
+      "src/components/**/*.{ts,tsx}",
+      "src/utils/**/*.{ts,tsx}"
     ]
   },
   "lint-staged": {
