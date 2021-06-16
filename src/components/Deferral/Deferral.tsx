@@ -22,7 +22,7 @@ import {
 
 interface DeferralProps {
   deleteId: string;
-  handleDelete: ReactEventHandler;
+  onClickDelete: ReactEventHandler;
 }
 
 const useStyles = makeStyles(({ palette }: Theme) =>
@@ -57,7 +57,7 @@ const categoryMap = new Map<DeferralCategory, DurationAttributes>([
   ["CDL", { value: "120", disabled: false }],
 ]);
 
-export function Deferral({ deleteId, handleDelete }: DeferralProps) {
+export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(true);
   const [title, setTitle] = useState("");
@@ -108,20 +108,27 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
     setSubtitle(event.target.value);
-    setDeferral({ ...deferral, number: event.target.value });
+    setDeferral({
+      ...deferral,
+      number: event.target.value,
+    });
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
     const category = event.target.value as DeferralCategory;
-    const duration = categoryMap.get(category)?.value || "";
-    setDeferral({ ...deferral, category, duration });
+    setDeferral({
+      ...deferral,
+      category,
+      duration: categoryMap.get(category)?.value || "",
+    });
   }
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value;
-    const duration =
-      Number(value) < 1 ? "1" : Math.floor(Number(value)).toString();
-    setDeferral({ ...deferral, duration });
+    const value = Number(event.target.value);
+    setDeferral({
+      ...deferral,
+      duration: value < 1 ? "1" : Math.floor(value).toString(),
+    });
   }
 
   return (
@@ -210,7 +217,7 @@ export function Deferral({ deleteId, handleDelete }: DeferralProps) {
         <IconButton
           aria-label="delete deferral"
           id={deleteId}
-          onClick={handleDelete}
+          onClick={onClickDelete}
         >
           <DeleteIcon />
         </IconButton>
