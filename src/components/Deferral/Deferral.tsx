@@ -13,6 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { DateSelector, IntervalStatusText } from "components";
+import { useAutoCollapse } from "utils";
 import {
   DeferralCategory,
   DeferralState,
@@ -59,7 +60,7 @@ const categoryMap = new Map<DeferralCategory, DurationAttributes>([
 
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(true);
+  const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, setState] = useState<DeferralState>({
     title: "",
     subtitle: "",
@@ -86,14 +87,6 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   );
   const durationDisabled =
     !state.category || categoryMap.get(state.category)?.disabled;
-
-  function handleChangeExpanded(_event: any, isExpanded: boolean) {
-    setExpanded(isExpanded);
-  }
-
-  function handleAcceptDate(_date: any) {
-    setExpanded(false);
-  }
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     setState({
@@ -139,7 +132,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   }
 
   return (
-    <Accordion expanded={expanded} onChange={handleChangeExpanded}>
+    <Accordion expanded={expanded} onChange={changeExpanded}>
       <AccordionSummary
         aria-controls="deferral-details"
         expandIcon={<ExpandMoreIcon />}
@@ -211,7 +204,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
             <DateSelector
               disabled={!state.duration}
               label="Deferral Date"
-              onAccept={handleAcceptDate}
+              onAccept={autoCollapse}
               onChange={handleChangeDate}
               pickerId="deferral-date"
               value={state.date}
