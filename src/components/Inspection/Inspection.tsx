@@ -8,12 +8,13 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DateSelector, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
 
-interface InspectionProps {
+export function Inspection({
+  title,
+  duration,
+}: {
   title: string;
   duration: number;
-}
-
-export function Inspection({ title, duration }: InspectionProps) {
+}) {
   const [date, setDate] = useState<Dayjs | null>(null);
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
 

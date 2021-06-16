@@ -11,9 +11,9 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { DateSelector, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
+import { useStyles } from "./styles";
 import {
   DeferralCategory,
   DeferralState,
@@ -25,23 +25,6 @@ interface DeferralProps {
   deleteId: string;
   onClickDelete: ReactEventHandler;
 }
-
-const useStyles = makeStyles(({ palette }: Theme) =>
-  createStyles({
-    title: {
-      flexBasis: "50%",
-    },
-    subtitle: {
-      color: palette.text.secondary,
-    },
-    input: {
-      width: "100%",
-    },
-    splitInput: {
-      width: "50%",
-    },
-  })
-);
 
 const types: DeferralType[] = ["MEL", "CDL", "NEF"];
 const typeMap = new Map<DeferralType, DeferralCategory[]>([
