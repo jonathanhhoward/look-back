@@ -29,8 +29,8 @@ export function IntervalStatusText({
         : days === duration
         ? "warning.main"
         : "error.contrastText";
-    color === "error.contrastText" && (bgcolor = "error.main");
   }
+  if (color === "error.contrastText") bgcolor = "error.main";
 
   return (
     <Box component="span" color={color} bgcolor={bgcolor}>
