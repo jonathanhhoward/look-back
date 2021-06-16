@@ -13,33 +13,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DateSelector, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
+import { categoryMap, typeMap, types } from "./datasets";
 import { useStyles } from "./styles";
-import {
-  DeferralCategory,
-  DeferralState,
-  DeferralType,
-  DurationAttributes,
-} from "./types";
+import { DeferralCategory, DeferralState, DeferralType } from "./types";
 
 interface DeferralProps {
   deleteId: string;
   onClickDelete: ReactEventHandler;
 }
-
-const types: DeferralType[] = ["MEL", "CDL", "NEF"];
-const typeMap = new Map<DeferralType, DeferralCategory[]>([
-  ["MEL", ["A", "B", "C", "D"]],
-  ["CDL", ["CDL"]],
-  ["NEF", ["P"]],
-]);
-const categoryMap = new Map<DeferralCategory, DurationAttributes>([
-  ["A", { value: "", disabled: false }],
-  ["B", { value: "3", disabled: true }],
-  ["C", { value: "10", disabled: true }],
-  ["D", { value: "120", disabled: true }],
-  ["P", { value: "120", disabled: false }],
-  ["CDL", { value: "120", disabled: false }],
-]);
 
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
