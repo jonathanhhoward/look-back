@@ -60,21 +60,21 @@ const categoryMap = new Map<DeferralCategory, DurationAttributes>([
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(true);
-  const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
-  const [deferral, setDeferral] = useState<DeferralState>({
+  const [state, setState] = useState<DeferralState>({
+    title: "",
+    subtitle: "",
     type: "",
     number: "",
     category: "",
     duration: "",
+    date: null,
   });
-  const [date, setDate] = useState<Dayjs | null>(null);
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
     </MenuItem>
   ));
-  const categories = deferral.type ? typeMap.get(deferral.type) : undefined;
+  const categories = state.type ? typeMap.get(state.type) : undefined;
   const categoryOptions = categories ? (
     categories.map((category) => (
       <MenuItem key={category} value={category}>
@@ -85,7 +85,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
     <MenuItem />
   );
   const durationDisabled =
-    !deferral.category || categoryMap.get(deferral.category)?.disabled;
+    !state.category || categoryMap.get(state.category)?.disabled;
 
   function handleChangeExpanded(_event: any, isExpanded: boolean) {
     setExpanded(isExpanded);
@@ -96,28 +96,28 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   }
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
-    setDeferral({
-      ...deferral,
+    setState({
+      ...state,
+      title: event.target.value,
       type: event.target.value as DeferralType,
       category: "",
       duration: "",
+      date: null,
     });
-    setDate(null);
   }
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
-    setSubtitle(event.target.value);
-    setDeferral({
-      ...deferral,
+    setState({
+      ...state,
+      subtitle: event.target.value,
       number: event.target.value,
     });
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
     const category = event.target.value as DeferralCategory;
-    setDeferral({
-      ...deferral,
+    setState({
+      ...state,
       category,
       duration: categoryMap.get(category)?.value || "",
     });
@@ -125,9 +125,16 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
     const value = Number(event.target.value);
-    setDeferral({
-      ...deferral,
+    setState({
+      ...state,
       duration: value < 1 ? "1" : Math.floor(value).toString(),
+    });
+  }
+
+  function handleChangeDate(date: Dayjs | null) {
+    setState({
+      ...state,
+      date,
     });
   }
 
@@ -140,13 +147,13 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
       >
         <Typography className={classes.title} variant="subtitle1">
           <IntervalStatusText
-            date={date}
-            duration={Number(deferral.duration)}
-            text={title || "Deferral Type"}
+            date={state.date}
+            duration={Number(state.duration)}
+            text={state.title || "Deferral Type"}
           />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
-          {subtitle || "Deferral Number"}
+          {state.subtitle || "Deferral Number"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -158,7 +165,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
               label="Type"
               onChange={handleChangeType}
               select
-              value={deferral.type}
+              value={state.type}
               variant="filled"
             >
               {typeOptions}
@@ -167,23 +174,23 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
-              disabled={!deferral.type}
+              disabled={!state.type}
               id="number"
               label="Number"
               onChange={handleChangeNumber}
-              value={deferral.number}
+              value={state.number}
               variant="filled"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.splitInput}
-              disabled={!deferral.number}
+              disabled={!state.number}
               id="category"
               label="Category"
               onChange={handleChangeCategory}
               select
-              value={deferral.category}
+              value={state.category}
               variant="filled"
             >
               {categoryOptions}
@@ -196,18 +203,18 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
               label="Duration"
               onChange={handleChangeDuration}
               type="number"
-              value={deferral.duration}
+              value={state.duration}
               variant="filled"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
-              disabled={!deferral.duration}
+              disabled={!state.duration}
               label="Deferral Date"
               onAccept={handleAcceptDate}
-              onChange={setDate}
+              onChange={handleChangeDate}
               pickerId="deferral-date"
-              value={date}
+              value={state.date}
               width="100%"
             />
           </Grid>
