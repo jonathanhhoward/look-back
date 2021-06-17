@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactEventHandler, useState } from "react";
+import { ChangeEvent, ReactEventHandler, useReducer } from "react";
 import { Dayjs } from "dayjs";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionActions from "@material-ui/core/AccordionActions";
@@ -13,27 +13,37 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DateSelector, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
+import {
+  changeCategory,
+  changeDate,
+  changeDuration,
+  changeNumber,
+  changeType,
+} from "./actions";
 import { categoryMap, typeMap, types } from "./datasets";
+import { reducer } from "./reducer";
 import { useStyles } from "./styles";
-import { DeferralCategory, DeferralState, DeferralType } from "./types";
+import { DeferralState } from "./types";
 
 interface DeferralProps {
   deleteId: string;
   onClickDelete: ReactEventHandler;
 }
 
+const initialState: DeferralState = {
+  title: "",
+  subtitle: "",
+  type: "",
+  number: "",
+  category: "",
+  duration: "",
+  date: null,
+};
+
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
-  const [state, setState] = useState<DeferralState>({
-    title: "",
-    subtitle: "",
-    type: "",
-    number: "",
-    category: "",
-    duration: "",
-    date: null,
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
@@ -53,46 +63,23 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
     !state.category || categoryMap.get(state.category)?.disabled;
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
-    setState({
-      ...state,
-      title: event.target.value,
-      type: event.target.value as DeferralType,
-      category: "",
-      duration: "",
-      date: null,
-    });
+    dispatch(changeType(event.target.value));
   }
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
-    setState({
-      ...state,
-      subtitle: event.target.value,
-      number: event.target.value,
-    });
+    dispatch(changeNumber(event.target.value));
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
-    const category = event.target.value as DeferralCategory;
-    setState({
-      ...state,
-      category,
-      duration: categoryMap.get(category)?.value || "",
-    });
+    dispatch(changeCategory(event.target.value));
   }
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
-    const value = Number(event.target.value);
-    setState({
-      ...state,
-      duration: value < 1 ? "1" : Math.floor(value).toString(),
-    });
+    dispatch(changeDuration(event.target.value));
   }
 
   function handleChangeDate(date: Dayjs | null) {
-    setState({
-      ...state,
-      date,
-    });
+    dispatch(changeDate(date));
   }
 
   return (
