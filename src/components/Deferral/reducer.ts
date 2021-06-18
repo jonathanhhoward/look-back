@@ -39,7 +39,7 @@ export function reducer(
       const number = Number(action.payload);
       return {
         ...state,
-        duration: number < 1 ? "1" : Math.floor(number).toString(),
+        duration: number >= 1 ? Math.floor(number).toString() : "1",
       };
     }
     case Actions.changeDate:
