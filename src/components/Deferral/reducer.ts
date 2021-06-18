@@ -32,7 +32,7 @@ export function reducer(
       return {
         ...state,
         category,
-        duration: categoryMap.get(category)?.value || "",
+        duration: categoryMap.get(category)?.value ?? "",
       };
     }
     case Actions.changeDuration: {
