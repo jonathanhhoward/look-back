@@ -49,16 +49,17 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
       {type}
     </MenuItem>
   ));
-  const categories = state.type ? typeMap.get(state.type) : undefined;
-  const categoryOptions = categories ? (
-    categories.map((category) => (
-      <MenuItem key={category} value={category}>
-        {category}
-      </MenuItem>
-    ))
-  ) : (
-    <MenuItem />
-  );
+  const categories = typeMap.get(state.type);
+  const categoryOptions =
+    categories !== undefined ? (
+      categories.map((category) => (
+        <MenuItem key={category} value={category}>
+          {category}
+        </MenuItem>
+      ))
+    ) : (
+      <MenuItem />
+    );
   const durationDisabled =
     !state.category || categoryMap.get(state.category)?.disabled;
 
