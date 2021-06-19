@@ -20,7 +20,7 @@ import {
   changeType,
 } from "./actions";
 import { categoryMap, typeMap } from "./datasets";
-import { DeferralHeader, TypeSelect } from "./components";
+import { Header, TypeSelect } from "./components";
 import { isEmptyString } from "./isEmptyString";
 import { reducer } from "./reducer";
 import { useStyles } from "./styles";
@@ -85,7 +85,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
         expandIcon={<ExpandMoreIcon />}
         id="deferral-summary"
       >
-        <DeferralHeader state={state} />
+        <Header state={state} />
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>

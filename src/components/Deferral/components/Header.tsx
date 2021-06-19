@@ -4,11 +4,11 @@ import { isEmptyString } from "components/Deferral/isEmptyString";
 import { useStyles } from "../styles";
 import { DeferralState } from "../types";
 
-interface DeferralHeaderProps {
+interface HeaderProps {
   state: DeferralState;
 }
 
-export function DeferralHeader({ state }: DeferralHeaderProps) {
+export function Header({ state }: HeaderProps) {
   const classes = useStyles();
   const title = isEmptyString(state.title) ? "Deferral Type" : state.title;
   const subtitle = isEmptyString(state.subtitle)
