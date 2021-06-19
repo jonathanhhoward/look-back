@@ -40,6 +40,10 @@ const initialState: DeferralState = {
   date: null,
 };
 
+function isEmptyString(s: string) {
+  return s === "";
+}
+
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
@@ -94,11 +98,11 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <IntervalStatusText
             date={state.date}
             duration={Number(state.duration)}
-            text={state.title !== "" ? state.title : "Deferral Type"}
+            text={!isEmptyString(state.title) ? state.title : "Deferral Type"}
           />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
-          {state.subtitle !== "" ? state.subtitle : "Deferral Number"}
+          {!isEmptyString(state.subtitle) ? state.subtitle : "Deferral Number"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -119,7 +123,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
-              disabled={state.type === ""}
+              disabled={isEmptyString(state.type)}
               id="number"
               label="Number"
               onChange={handleChangeNumber}
@@ -130,7 +134,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.splitInput}
-              disabled={state.number === ""}
+              disabled={isEmptyString(state.number)}
               id="category"
               label="Category"
               onChange={handleChangeCategory}
@@ -154,7 +158,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
-              disabled={state.duration === ""}
+              disabled={isEmptyString(state.duration)}
               label="Deferral Date"
               onAccept={autoCollapse}
               onChange={handleChangeDate}
