@@ -1,12 +1,6 @@
 import Box from "@material-ui/core/Box";
 import dayjs, { Dayjs } from "dayjs";
-
-type StatusColor =
-  | "success.main"
-  | "warning.main"
-  | "error.contrastText"
-  | undefined;
-type StatusBgcolor = "error.main" | undefined;
+import { StatusBgcolor, StatusColor } from "./types";
 
 interface IntervalStatusTextProps {
   date: Dayjs | null;
