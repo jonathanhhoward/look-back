@@ -94,11 +94,11 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <IntervalStatusText
             date={state.date}
             duration={Number(state.duration)}
-            text={state.title || "Deferral Type"}
+            text={state.title !== "" ? state.title : "Deferral Type"}
           />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
-          {state.subtitle || "Deferral Number"}
+          {state.subtitle !== "" ? state.subtitle : "Deferral Number"}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -119,7 +119,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.input}
-              disabled={!state.type}
+              disabled={state.type === ""}
               id="number"
               label="Number"
               onChange={handleChangeNumber}
@@ -130,7 +130,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <Grid item xs={12} sm={6} md={3}>
             <TextField
               className={classes.splitInput}
-              disabled={!state.number}
+              disabled={state.number === ""}
               id="category"
               label="Category"
               onChange={handleChangeCategory}
@@ -154,7 +154,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
-              disabled={!state.duration}
+              disabled={state.duration === ""}
               label="Deferral Date"
               onAccept={autoCollapse}
               onChange={handleChangeDate}
