@@ -48,6 +48,10 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const title = !isEmptyString(state.title) ? state.title : "Deferral Type";
+  const subtitle = !isEmptyString(state.subtitle)
+    ? state.subtitle
+    : "Deferral Number";
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
@@ -98,11 +102,11 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           <IntervalStatusText
             date={state.date}
             duration={Number(state.duration)}
-            text={!isEmptyString(state.title) ? state.title : "Deferral Type"}
+            text={title}
           />
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle1">
-          {!isEmptyString(state.subtitle) ? state.subtitle : "Deferral Number"}
+          {subtitle}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
