@@ -19,8 +19,8 @@ import {
   changeNumber,
   changeType,
 } from "./actions";
-import { categoryMap, typeMap, types } from "./datasets";
-import { DeferralHeader } from "./components";
+import { categoryMap, typeMap } from "./datasets";
+import { DeferralHeader, TypeSelect } from "./components";
 import { isEmptyString } from "./isEmptyString";
 import { reducer } from "./reducer";
 import { useStyles } from "./styles";
@@ -45,11 +45,6 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const typeOptions = types.map((type) => (
-    <MenuItem key={type} value={type}>
-      {type}
-    </MenuItem>
-  ));
   const categories = typeMap.get(state.type);
   const categoryOptions =
     categories === undefined ? (
@@ -95,17 +90,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
       <AccordionDetails>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              className={classes.input}
-              id="type"
-              label="Type"
-              onChange={handleChangeType}
-              select
-              value={state.type}
-              variant="filled"
-            >
-              {typeOptions}
-            </TextField>
+            <TypeSelect onChange={handleChangeType} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
