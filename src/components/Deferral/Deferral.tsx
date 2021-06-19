@@ -68,8 +68,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
         </MenuItem>
       ))
     );
-  const durationDisabled =
-    !state.category || categoryMap.get(state.category)?.disabled;
+  const durationDisabled = categoryMap.get(state.category)?.disabled ?? true;
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     dispatch(changeType(event.target.value));
