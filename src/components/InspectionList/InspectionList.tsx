@@ -8,8 +8,8 @@ export function InspectionList() {
     <Card elevation={0} square>
       <CardHeader title="Inspection" />
       <CardContent>
-        <Inspection title="14-Day" duration={14} />
         <Inspection title="2-Day" duration={2} />
+        <Inspection title="14-Day" duration={14} />
       </CardContent>
     </Card>
   );
