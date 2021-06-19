@@ -8,10 +8,9 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DateSelector, IntervalStatusText } from "components";
+import { DateSelector } from "components";
 import { useAutoCollapse } from "utils";
 import {
   changeCategory,
@@ -21,6 +20,8 @@ import {
   changeType,
 } from "./actions";
 import { categoryMap, typeMap, types } from "./datasets";
+import { DeferralHeader } from "./components";
+import { isEmptyString } from "./isEmptyString";
 import { reducer } from "./reducer";
 import { useStyles } from "./styles";
 import { DeferralState } from "./types";
@@ -40,18 +41,10 @@ const initialState: DeferralState = {
   date: null,
 };
 
-function isEmptyString(s: string) {
-  return s === "";
-}
-
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const title = isEmptyString(state.title) ? "Deferral Type" : state.title;
-  const subtitle = isEmptyString(state.subtitle)
-    ? "Deferral Number"
-    : state.subtitle;
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
@@ -97,16 +90,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
         expandIcon={<ExpandMoreIcon />}
         id="deferral-summary"
       >
-        <Typography className={classes.title} variant="subtitle1">
-          <IntervalStatusText
-            date={state.date}
-            duration={Number(state.duration)}
-            text={title}
-          />
-        </Typography>
-        <Typography className={classes.subtitle} variant="subtitle1">
-          {subtitle}
-        </Typography>
+        <DeferralHeader state={state} />
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
