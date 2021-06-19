@@ -128,4 +128,4 @@ test("inputting values enables the next input and updates title and subtitle", a
   expect(categoryOptions).toStrictEqual(["CDL"]);
   expect((duration as HTMLInputElement).value).toStrictEqual("");
   expect(duration).toBeDisabled();
-});
+}, 10000);
