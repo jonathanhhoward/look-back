@@ -30,7 +30,9 @@ export function IntervalStatusText({
         ? "warning.main"
         : "error.contrastText";
   }
-  if (color === "error.contrastText") bgcolor = "error.main";
+  if (color === "error.contrastText") {
+    bgcolor = "error.main";
+  }
 
   return (
     <Box component="span" color={color} bgcolor={bgcolor} px={1}>
