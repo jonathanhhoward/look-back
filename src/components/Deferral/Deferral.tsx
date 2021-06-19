@@ -48,10 +48,10 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const title = !isEmptyString(state.title) ? state.title : "Deferral Type";
-  const subtitle = !isEmptyString(state.subtitle)
-    ? state.subtitle
-    : "Deferral Number";
+  const title = isEmptyString(state.title) ? "Deferral Type" : state.title;
+  const subtitle = isEmptyString(state.subtitle)
+    ? "Deferral Number"
+    : state.subtitle;
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
       {type}
@@ -59,14 +59,14 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   ));
   const categories = typeMap.get(state.type);
   const categoryOptions =
-    categories !== undefined ? (
+    categories === undefined ? (
+      <MenuItem />
+    ) : (
       categories.map((category) => (
         <MenuItem key={category} value={category}>
           {category}
         </MenuItem>
       ))
-    ) : (
-      <MenuItem />
     );
   const durationDisabled =
     !state.category || categoryMap.get(state.category)?.disabled;
