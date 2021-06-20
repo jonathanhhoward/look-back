@@ -6,7 +6,6 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -19,8 +18,8 @@ import {
   changeNumber,
   changeType,
 } from "./actions";
-import { categoryMap, typeMap } from "./datasets";
-import { Header, NumberField, TypeSelect } from "./components";
+import { categoryMap } from "./datasets";
+import { CategorySelect, Header, NumberField, TypeSelect } from "./components";
 import { isEmptyString } from "./isEmptyString";
 import { reducer } from "./reducer";
 import { useStyles } from "./styles";
@@ -45,17 +44,6 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const categories = typeMap.get(state.type);
-  const categoryOptions =
-    categories === undefined ? (
-      <MenuItem />
-    ) : (
-      categories.map((category) => (
-        <MenuItem key={category} value={category}>
-          {category}
-        </MenuItem>
-      ))
-    );
   const durationDisabled = categoryMap.get(state.category)?.disabled ?? true;
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
@@ -96,18 +84,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
             <NumberField onChange={handleChangeNumber} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              className={classes.splitInput}
-              disabled={isEmptyString(state.number)}
-              id="category"
-              label="Category"
-              onChange={handleChangeCategory}
-              select
-              value={state.category}
-              variant="filled"
-            >
-              {categoryOptions}
-            </TextField>
+            <CategorySelect onChange={handleChangeCategory} state={state} />
             <TextField
               className={classes.splitInput}
               disabled={durationDisabled}
