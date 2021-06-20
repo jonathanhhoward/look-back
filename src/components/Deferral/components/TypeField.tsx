@@ -5,12 +5,12 @@ import { types } from "../datasets";
 import { useStyles } from "../styles";
 import { DeferralState } from "../types";
 
-interface TypeSelectProps {
+interface TypeFieldProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   state: DeferralState;
 }
 
-export function TypeSelect({ onChange, state }: TypeSelectProps) {
+export function TypeField({ onChange, state }: TypeFieldProps) {
   const classes = useStyles();
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>

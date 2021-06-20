@@ -22,7 +22,7 @@ import {
   DurationField,
   Header,
   NumberField,
-  TypeSelect,
+  TypeField,
 } from "./components";
 import { reducer } from "./reducer";
 import { DeferralState } from "./types";
@@ -78,7 +78,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
       <AccordionDetails>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={3}>
-            <TypeSelect onChange={handleChangeType} state={state} />
+            <TypeField onChange={handleChangeType} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <NumberField onChange={handleChangeNumber} state={state} />
