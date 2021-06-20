@@ -20,7 +20,7 @@ import {
   changeType,
 } from "./actions";
 import { categoryMap, typeMap } from "./datasets";
-import { Header, TypeSelect } from "./components";
+import { Header, NumberField, TypeSelect } from "./components";
 import { isEmptyString } from "./isEmptyString";
 import { reducer } from "./reducer";
 import { useStyles } from "./styles";
@@ -93,15 +93,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
             <TypeSelect onChange={handleChangeType} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              className={classes.input}
-              disabled={isEmptyString(state.type)}
-              id="number"
-              label="Number"
-              onChange={handleChangeNumber}
-              value={state.number}
-              variant="filled"
-            />
+            <NumberField onChange={handleChangeNumber} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextField
