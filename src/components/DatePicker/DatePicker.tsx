@@ -1,9 +1,12 @@
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DayjsUtils from "@date-io/dayjs";
+import {
+  DatePicker as MuiDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import { makeStyles } from "@material-ui/core/styles";
-import DayjsUtils from "@date-io/dayjs";
 
-interface DateSelectorProps {
+interface DatePickerProps {
   disabled?: boolean;
   label: string;
   onAccept: (date: MaterialUiPickersDate) => void;
@@ -13,17 +16,17 @@ interface DateSelectorProps {
   width?: string;
 }
 
-interface DateSelectorStyleProps {
+interface StyleProps {
   width?: string;
 }
 
 const useStyles = makeStyles({
-  datepicker: ({ width }: DateSelectorStyleProps) => ({
+  datepicker: ({ width }: StyleProps) => ({
     width,
   }),
 });
 
-export function DateSelector({
+export function DatePicker({
   disabled,
   label,
   onAccept,
@@ -31,12 +34,12 @@ export function DateSelector({
   pickerId,
   value,
   width,
-}: DateSelectorProps) {
+}: DatePickerProps) {
   const classes = useStyles({ width });
 
   return (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
-      <DatePicker
+      <MuiDatePicker
         autoOk
         className={classes.datepicker}
         disabled={disabled}

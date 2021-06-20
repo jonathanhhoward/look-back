@@ -5,7 +5,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DateSelector, IntervalStatusText } from "components";
+import { DatePicker, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
 
 interface InspectionProps {
@@ -29,7 +29,7 @@ export function Inspection({ title, duration }: InspectionProps) {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <DateSelector
+        <DatePicker
           label="Inspection Date"
           onAccept={autoCollapse}
           onChange={setDate}

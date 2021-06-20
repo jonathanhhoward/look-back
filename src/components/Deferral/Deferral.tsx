@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DateSelector } from "components";
+import { DatePicker } from "components";
 import { useAutoCollapse } from "utils";
 import {
   changeCategory,
@@ -89,7 +89,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
             <DurationField onChange={handleChangeDuration} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <DateSelector
+            <DatePicker
               disabled={isEmptyString(state.duration)}
               label="Deferral Date"
               onAccept={autoCollapse}

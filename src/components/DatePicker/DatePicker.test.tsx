@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import { DateSelector } from "./DateSelector";
 import userEvent from "@testing-library/user-event";
+import { DatePicker } from "./DatePicker";
 
 const handleAccept = jest.fn();
 const handleChange = jest.fn();
 
 test("renders a datepicker", () => {
   render(
-    <DateSelector
+    <DatePicker
       label="picker label"
       onAccept={handleAccept}
       onChange={handleChange}

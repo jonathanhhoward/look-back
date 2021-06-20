@@ -1,5 +1,5 @@
 export * from "./App";
-export * from "./DateSelector";
+export * from "./DatePicker";
 export * from "./Deferral";
 export * from "./DeferralList";
 export * from "./Inspection";
