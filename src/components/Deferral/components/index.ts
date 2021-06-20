@@ -1,4 +1,4 @@
-export * from "./CategorySelect";
+export * from "./CategoryField";
 export * from "./DateField";
 export * from "./DurationField";
 export * from "./Header";

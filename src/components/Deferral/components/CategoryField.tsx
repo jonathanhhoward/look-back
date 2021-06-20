@@ -6,12 +6,12 @@ import { isEmptyString } from "../isEmptyString";
 import { useStyles } from "../styles";
 import { DeferralState } from "../types";
 
-interface CategorySelectProps {
+interface CategoryFieldProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   state: DeferralState;
 }
 
-export function CategorySelect({ onChange, state }: CategorySelectProps) {
+export function CategoryField({ onChange, state }: CategoryFieldProps) {
   const classes = useStyles();
   const categories = typeMap.get(state.type);
   const categoryOptions =

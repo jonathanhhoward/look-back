@@ -17,7 +17,7 @@ import {
   changeType,
 } from "./actions";
 import {
-  CategorySelect,
+  CategoryField,
   DateField,
   DurationField,
   Header,
@@ -84,7 +84,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
             <NumberField onChange={handleChangeNumber} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <CategorySelect onChange={handleChangeCategory} state={state} />
+            <CategoryField onChange={handleChangeCategory} state={state} />
             <DurationField onChange={handleChangeDuration} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
