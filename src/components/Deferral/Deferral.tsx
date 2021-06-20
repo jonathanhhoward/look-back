@@ -6,7 +6,6 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DateSelector } from "components";
@@ -18,11 +17,15 @@ import {
   changeNumber,
   changeType,
 } from "./actions";
-import { categoryMap } from "./datasets";
-import { CategorySelect, Header, NumberField, TypeSelect } from "./components";
+import {
+  CategorySelect,
+  DurationField,
+  Header,
+  NumberField,
+  TypeSelect,
+} from "./components";
 import { isEmptyString } from "./isEmptyString";
 import { reducer } from "./reducer";
-import { useStyles } from "./styles";
 import { DeferralState } from "./types";
 
 interface DeferralProps {
@@ -41,10 +44,8 @@ const initialState: DeferralState = {
 };
 
 export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
-  const classes = useStyles();
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const durationDisabled = categoryMap.get(state.category)?.disabled ?? true;
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
     dispatch(changeType(event.target.value));
@@ -85,17 +86,7 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <CategorySelect onChange={handleChangeCategory} state={state} />
-            <TextField
-              className={classes.splitInput}
-              disabled={durationDisabled}
-              id="duration"
-              inputProps={{ min: "1" }}
-              label="Duration"
-              onChange={handleChangeDuration}
-              type="number"
-              value={state.duration}
-              variant="filled"
-            />
+            <DurationField onChange={handleChangeDuration} state={state} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <DateSelector
