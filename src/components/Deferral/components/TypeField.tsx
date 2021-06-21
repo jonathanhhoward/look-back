@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
+import { DeferralState } from "../state";
 import { useStyles } from "../styles";
-import { DeferralState } from "../types";
 import { types } from "../utils";
 
 interface TypeFieldProps {

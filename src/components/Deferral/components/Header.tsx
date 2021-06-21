@@ -1,7 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import { IntervalStatusText } from "components";
+import { DeferralState } from "../state";
 import { useStyles } from "../styles";
-import { DeferralState } from "../types";
 import { isEmptyString } from "../utils";
 
 interface HeaderProps {

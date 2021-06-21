@@ -1,10 +1,6 @@
-import {
-  DeferralAction,
-  DeferralCategory,
-  DeferralState,
-  DeferralType,
-} from "../types";
+import { DeferralCategory, DeferralType } from "../types";
 import { categoryMap } from "../utils";
+import { DeferralAction, DeferralState } from "./types";
 
 export function reducer(
   state: DeferralState,

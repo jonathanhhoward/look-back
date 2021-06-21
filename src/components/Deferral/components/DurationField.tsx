@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import TextField from "@material-ui/core/TextField";
+import { DeferralState } from "../state";
 import { useStyles } from "../styles";
-import { DeferralState } from "../types";
 import { categoryMap } from "../utils";
 
 interface DurationFieldProps {

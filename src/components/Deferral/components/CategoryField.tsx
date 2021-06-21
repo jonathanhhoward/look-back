@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { useStyles } from "../styles";
-import { DeferralState } from "../types";
+import { DeferralState } from "../state";
 import { isEmptyString, typeMap } from "../utils";
 
 interface CategoryFieldProps {

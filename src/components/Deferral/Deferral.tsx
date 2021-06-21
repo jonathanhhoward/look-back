@@ -17,8 +17,7 @@ import {
   NumberField,
   TypeField,
 } from "./components";
-import { reducer } from "./state";
-import { DeferralState } from "./types";
+import { DeferralState, reducer } from "./state";
 
 interface DeferralProps {
   deleteId: string;
