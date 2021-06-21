@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 import TextField from "@material-ui/core/TextField";
-import { categoryMap } from "../datasets";
 import { useStyles } from "../styles";
 import { DeferralState } from "../types";
+import { categoryMap } from "../utils";
 
 interface DurationFieldProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;

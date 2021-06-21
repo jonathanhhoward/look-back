@@ -1,4 +1,4 @@
-import { DeferralCategory, DeferralType, DurationAttributes } from "./types";
+import { DeferralCategory, DeferralType, DurationAttributes } from "../types";
 
 export const types: DeferralType[] = ["MEL", "CDL", "NEF"];
 

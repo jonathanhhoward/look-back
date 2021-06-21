@@ -10,13 +10,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useAutoCollapse } from "utils";
 import {
-  changeCategory,
-  changeDate,
-  changeDuration,
-  changeNumber,
-  changeType,
-} from "./actions";
-import {
   CategoryField,
   DateField,
   DurationField,
@@ -24,7 +17,14 @@ import {
   NumberField,
   TypeField,
 } from "./components";
-import { reducer } from "./reducer";
+import {
+  changeCategory,
+  changeDate,
+  changeDuration,
+  changeNumber,
+  changeType,
+  reducer,
+} from "./state";
 import { DeferralState } from "./types";
 
 interface DeferralProps {

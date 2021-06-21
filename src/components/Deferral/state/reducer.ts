@@ -1,11 +1,11 @@
-import { categoryMap } from "./datasets";
 import {
   Actions,
   DeferralAction,
   DeferralCategory,
   DeferralState,
   DeferralType,
-} from "./types";
+} from "../types";
+import { categoryMap } from "../utils";
 
 export function reducer(
   state: DeferralState,

@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 import TextField from "@material-ui/core/TextField";
-import { isEmptyString } from "../isEmptyString";
 import { useStyles } from "../styles";
 import { DeferralState } from "../types";
+import { isEmptyString } from "../utils";
 
 interface NumberFieldProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;

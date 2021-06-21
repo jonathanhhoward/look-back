@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-import { Actions, DeferralAction } from "./types";
+import { Actions, DeferralAction } from "../types";
 
 export function changeType(type: string): DeferralAction {
   return {

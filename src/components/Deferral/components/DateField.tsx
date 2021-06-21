@@ -1,7 +1,7 @@
 import { Dayjs } from "dayjs";
 import { DatePicker } from "components";
-import { isEmptyString } from "../isEmptyString";
 import { DeferralState } from "../types";
+import { isEmptyString } from "../utils";
 
 interface DateFieldProps {
   onAccept: () => void;
