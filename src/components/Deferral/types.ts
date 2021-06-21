@@ -19,25 +19,13 @@ export interface DurationAttributes {
   disabled: boolean;
 }
 
-export enum Actions {
-  changeType = "CHANGE_TYPE",
-  changeNumber = "CHANGE_NUMBER",
-  changeCategory = "CHANGE_CATEGORY",
-  changeDuration = "CHANGE_DURATION",
-  changeDate = "CHANGE_DATE",
-}
-
 interface StringAction {
-  type:
-    | Actions.changeType
-    | Actions.changeNumber
-    | Actions.changeCategory
-    | Actions.changeDuration;
+  type: "CHANGE_TYPE" | "CHANGE_NUMBER" | "CHANGE_CATEGORY" | "CHANGE_DURATION";
   payload: string;
 }
 
 interface DayjsAction {
-  type: Actions.changeDate;
+  type: "CHANGE_DATE";
   payload: Dayjs | null;
 }
 

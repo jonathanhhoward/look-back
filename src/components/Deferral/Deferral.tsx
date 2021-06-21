@@ -17,14 +17,7 @@ import {
   NumberField,
   TypeField,
 } from "./components";
-import {
-  changeCategory,
-  changeDate,
-  changeDuration,
-  changeNumber,
-  changeType,
-  reducer,
-} from "./state";
+import { reducer } from "./state";
 import { DeferralState } from "./types";
 
 interface DeferralProps {
@@ -47,23 +40,38 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
-    dispatch(changeType(event.target.value));
+    dispatch({
+      type: "CHANGE_TYPE",
+      payload: event.target.value,
+    });
   }
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
-    dispatch(changeNumber(event.target.value));
+    dispatch({
+      type: "CHANGE_NUMBER",
+      payload: event.target.value,
+    });
   }
 
   function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
-    dispatch(changeCategory(event.target.value));
+    dispatch({
+      type: "CHANGE_CATEGORY",
+      payload: event.target.value,
+    });
   }
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
-    dispatch(changeDuration(event.target.value));
+    dispatch({
+      type: "CHANGE_DURATION",
+      payload: event.target.value,
+    });
   }
 
   function handleChangeDate(date: Dayjs | null) {
-    dispatch(changeDate(date));
+    dispatch({
+      type: "CHANGE_DATE",
+      payload: date,
+    });
   }
 
   return (

@@ -1,5 +1,4 @@
 import {
-  Actions,
   DeferralAction,
   DeferralCategory,
   DeferralState,
@@ -12,7 +11,7 @@ export function reducer(
   action: DeferralAction
 ): DeferralState {
   switch (action.type) {
-    case Actions.changeType:
+    case "CHANGE_TYPE":
       return {
         ...state,
         title: action.payload,
@@ -21,13 +20,13 @@ export function reducer(
         duration: "",
         date: null,
       };
-    case Actions.changeNumber:
+    case "CHANGE_NUMBER":
       return {
         ...state,
         subtitle: action.payload,
         number: action.payload,
       };
-    case Actions.changeCategory: {
+    case "CHANGE_CATEGORY": {
       const category = action.payload as DeferralCategory;
       return {
         ...state,
@@ -35,14 +34,14 @@ export function reducer(
         duration: categoryMap.get(category)?.value ?? "",
       };
     }
-    case Actions.changeDuration: {
+    case "CHANGE_DURATION": {
       const number = Number(action.payload);
       return {
         ...state,
         duration: number >= 1 ? Math.floor(number).toString() : "1",
       };
     }
-    case Actions.changeDate:
+    case "CHANGE_DATE":
       return {
         ...state,
         date: action.payload,
