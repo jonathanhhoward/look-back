@@ -6,18 +6,16 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { DatePicker, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
-import {
-  CategoryField,
-  DateField,
-  DurationField,
-  Header,
-  NumberField,
-  TypeField,
-} from "./components";
 import { DeferralState, reducer } from "./state";
+import { useStyles } from "./styles";
+import { categoryMap, isEmptyString, typeMap, types } from "./utils";
 
 const initialState: DeferralState = {
   title: "",
@@ -111,5 +109,148 @@ export function Deferral(props: {
         </IconButton>
       </AccordionActions>
     </Accordion>
+  );
+}
+
+function Header(props: { state: DeferralState }) {
+  const classes = useStyles();
+  const title = isEmptyString(props.state.title)
+    ? "Deferral Type"
+    : props.state.title;
+  const subtitle = isEmptyString(props.state.subtitle)
+    ? "Deferral Number"
+    : props.state.subtitle;
+
+  return (
+    <>
+      <Typography className={classes.title} variant="subtitle1">
+        <IntervalStatusText
+          date={props.state.date}
+          duration={Number(props.state.duration)}
+          text={title}
+        />
+      </Typography>
+      <Typography className={classes.subtitle} variant="subtitle1">
+        {subtitle}
+      </Typography>
+    </>
+  );
+}
+
+function TypeField(props: {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  state: DeferralState;
+}) {
+  const classes = useStyles();
+  const typeOptions = types.map((type) => (
+    <MenuItem key={type} value={type}>
+      {type}
+    </MenuItem>
+  ));
+
+  return (
+    <TextField
+      className={classes.input}
+      id="type"
+      label="Type"
+      onChange={props.onChange}
+      select
+      value={props.state.type}
+      variant="filled"
+    >
+      {typeOptions}
+    </TextField>
+  );
+}
+
+function NumberField(props: {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  state: DeferralState;
+}) {
+  const classes = useStyles();
+
+  return (
+    <TextField
+      className={classes.input}
+      disabled={isEmptyString(props.state.type)}
+      id="number"
+      label="Number"
+      onChange={props.onChange}
+      value={props.state.number}
+      variant="filled"
+    />
+  );
+}
+
+function CategoryField(props: {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  state: DeferralState;
+}) {
+  const classes = useStyles();
+  const categories = typeMap.get(props.state.type);
+  const categoryOptions =
+    categories === undefined ? (
+      <MenuItem />
+    ) : (
+      categories.map((category) => (
+        <MenuItem key={category} value={category}>
+          {category}
+        </MenuItem>
+      ))
+    );
+
+  return (
+    <TextField
+      className={classes.splitInput}
+      disabled={isEmptyString(props.state.number)}
+      id="category"
+      label="Category"
+      onChange={props.onChange}
+      select
+      value={props.state.category}
+      variant="filled"
+    >
+      {categoryOptions}
+    </TextField>
+  );
+}
+
+function DurationField(props: {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  state: DeferralState;
+}) {
+  const classes = useStyles();
+  const disabled = categoryMap.get(props.state.category)?.disabled ?? true;
+
+  return (
+    <TextField
+      className={classes.splitInput}
+      disabled={disabled}
+      id="duration"
+      inputProps={{ min: "1" }}
+      label="Duration"
+      onChange={props.onChange}
+      type="number"
+      value={props.state.duration}
+      variant="filled"
+    />
+  );
+}
+
+function DateField(props: {
+  onAccept: () => void;
+  onChange: (date: Dayjs | null) => void;
+  state: DeferralState;
+}) {
+  return (
+    <DatePicker
+      disabled={isEmptyString(props.state.duration)}
+      label="Deferral Date"
+      onAccept={props.onAccept}
+      onChange={props.onChange}
+      pickerId="deferral-date"
+      value={props.state.date}
+      width="100%"
+    />
   );
 }
