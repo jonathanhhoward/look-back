@@ -4,14 +4,12 @@ import { DeferralState } from "../state";
 import { useStyles } from "../styles";
 import { categoryMap } from "../utils";
 
-interface DurationFieldProps {
+export function DurationField(props: {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   state: DeferralState;
-}
-
-export function DurationField({ onChange, state }: DurationFieldProps) {
+}) {
   const classes = useStyles();
-  const disabled = categoryMap.get(state.category)?.disabled ?? true;
+  const disabled = categoryMap.get(props.state.category)?.disabled ?? true;
 
   return (
     <TextField
@@ -20,9 +18,9 @@ export function DurationField({ onChange, state }: DurationFieldProps) {
       id="duration"
       inputProps={{ min: "1" }}
       label="Duration"
-      onChange={onChange}
+      onChange={props.onChange}
       type="number"
-      value={state.duration}
+      value={props.state.duration}
       variant="filled"
     />
   );

@@ -8,12 +8,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DatePicker, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
 
-interface InspectionProps {
-  title: string;
-  duration: number;
-}
-
-export function Inspection({ title, duration }: InspectionProps) {
+export function Inspection(props: { title: string; duration: number }) {
   const [date, setDate] = useState<Dayjs | null>(null);
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
 
@@ -25,7 +20,11 @@ export function Inspection({ title, duration }: InspectionProps) {
         id="inspection-summary"
       >
         <Typography variant="subtitle1">
-          <IntervalStatusText date={date} duration={duration} text={title} />
+          <IntervalStatusText
+            date={date}
+            duration={props.duration}
+            text={props.title}
+          />
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
@@ -33,7 +32,7 @@ export function Inspection({ title, duration }: InspectionProps) {
           label="Inspection Date"
           onAccept={autoCollapse}
           onChange={setDate}
-          pickerId={title}
+          pickerId={props.title}
           value={date}
         />
       </AccordionDetails>

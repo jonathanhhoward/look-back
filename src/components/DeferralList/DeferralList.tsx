@@ -7,12 +7,8 @@ import AddIcon from "@material-ui/icons/Add";
 import { Deferral } from "components";
 import { nanoid } from "nanoid";
 
-interface DeferralId {
-  id: string;
-}
-
 export function DeferralList() {
-  const [deferrals, setDeferrals] = useState<DeferralId[]>([]);
+  const [deferrals, setDeferrals] = useState<{ id: string }[]>([]);
 
   function handleAddDeferral() {
     setDeferrals(deferrals.concat({ id: `deferral-${nanoid()}` }));

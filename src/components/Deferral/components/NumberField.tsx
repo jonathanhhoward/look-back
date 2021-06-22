@@ -4,22 +4,20 @@ import { DeferralState } from "../state";
 import { useStyles } from "../styles";
 import { isEmptyString } from "../utils";
 
-interface NumberFieldProps {
+export function NumberField(props: {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   state: DeferralState;
-}
-
-export function NumberField({ onChange, state }: NumberFieldProps) {
+}) {
   const classes = useStyles();
 
   return (
     <TextField
       className={classes.input}
-      disabled={isEmptyString(state.type)}
+      disabled={isEmptyString(props.state.type)}
       id="number"
       label="Number"
-      onChange={onChange}
-      value={state.number}
+      onChange={props.onChange}
+      value={props.state.number}
       variant="filled"
     />
   );

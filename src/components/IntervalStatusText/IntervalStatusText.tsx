@@ -2,25 +2,19 @@ import Box from "@material-ui/core/Box";
 import dayjs, { Dayjs } from "dayjs";
 import { StatusBgcolor, StatusColor } from "./types";
 
-interface IntervalStatusTextProps {
+export function IntervalStatusText(props: {
   date: Dayjs | null;
   duration: number;
   text: string;
-}
-
-export function IntervalStatusText({
-  date,
-  duration,
-  text,
-}: IntervalStatusTextProps) {
+}) {
   let color: StatusColor;
   let bgcolor: StatusBgcolor;
-  if (date) {
-    const days = dayjs().diff(date, "days");
+  if (props.date) {
+    const days = dayjs().diff(props.date, "days");
     color =
-      days < duration
+      days < props.duration
         ? "success.main"
-        : days === duration
+        : days === props.duration
         ? "warning.main"
         : "error.contrastText";
   }
@@ -30,7 +24,7 @@ export function IntervalStatusText({
 
   return (
     <Box component="span" color={color} bgcolor={bgcolor} px={1}>
-      {text}
+      {props.text}
     </Box>
   );
 }

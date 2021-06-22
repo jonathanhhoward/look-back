@@ -3,21 +3,19 @@ import { DatePicker } from "components";
 import { DeferralState } from "../state";
 import { isEmptyString } from "../utils";
 
-interface DateFieldProps {
+export function DateField(props: {
   onAccept: () => void;
   onChange: (date: Dayjs | null) => void;
   state: DeferralState;
-}
-
-export function DateField({ onAccept, onChange, state }: DateFieldProps) {
+}) {
   return (
     <DatePicker
-      disabled={isEmptyString(state.duration)}
+      disabled={isEmptyString(props.state.duration)}
       label="Deferral Date"
-      onAccept={onAccept}
-      onChange={onChange}
+      onAccept={props.onAccept}
+      onChange={props.onChange}
       pickerId="deferral-date"
-      value={state.date}
+      value={props.state.date}
       width="100%"
     />
   );

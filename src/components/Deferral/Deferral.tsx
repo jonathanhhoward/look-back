@@ -19,11 +19,6 @@ import {
 } from "./components";
 import { DeferralState, reducer } from "./state";
 
-interface DeferralProps {
-  deleteId: string;
-  onClickDelete: ReactEventHandler;
-}
-
 const initialState: DeferralState = {
   title: "",
   subtitle: "",
@@ -34,7 +29,10 @@ const initialState: DeferralState = {
   date: null,
 };
 
-export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
+export function Deferral(props: {
+  deleteId: string;
+  onClickDelete: ReactEventHandler;
+}) {
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -106,8 +104,8 @@ export function Deferral({ deleteId, onClickDelete }: DeferralProps) {
       <AccordionActions>
         <IconButton
           aria-label="delete deferral"
-          id={deleteId}
-          onClick={onClickDelete}
+          id={props.deleteId}
+          onClick={props.onClickDelete}
         >
           <DeleteIcon />
         </IconButton>

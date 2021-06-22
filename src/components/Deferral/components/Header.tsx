@@ -4,23 +4,21 @@ import { DeferralState } from "../state";
 import { useStyles } from "../styles";
 import { isEmptyString } from "../utils";
 
-interface HeaderProps {
-  state: DeferralState;
-}
-
-export function Header({ state }: HeaderProps) {
+export function Header(props: { state: DeferralState }) {
   const classes = useStyles();
-  const title = isEmptyString(state.title) ? "Deferral Type" : state.title;
-  const subtitle = isEmptyString(state.subtitle)
+  const title = isEmptyString(props.state.title)
+    ? "Deferral Type"
+    : props.state.title;
+  const subtitle = isEmptyString(props.state.subtitle)
     ? "Deferral Number"
-    : state.subtitle;
+    : props.state.subtitle;
 
   return (
     <>
       <Typography className={classes.title} variant="subtitle1">
         <IntervalStatusText
-          date={state.date}
-          duration={Number(state.duration)}
+          date={props.state.date}
+          duration={Number(props.state.duration)}
           text={title}
         />
       </Typography>

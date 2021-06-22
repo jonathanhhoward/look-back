@@ -5,14 +5,12 @@ import { useStyles } from "../styles";
 import { DeferralState } from "../state";
 import { isEmptyString, typeMap } from "../utils";
 
-interface CategoryFieldProps {
+export function CategoryField(props: {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   state: DeferralState;
-}
-
-export function CategoryField({ onChange, state }: CategoryFieldProps) {
+}) {
   const classes = useStyles();
-  const categories = typeMap.get(state.type);
+  const categories = typeMap.get(props.state.type);
   const categoryOptions =
     categories === undefined ? (
       <MenuItem />
@@ -27,12 +25,12 @@ export function CategoryField({ onChange, state }: CategoryFieldProps) {
   return (
     <TextField
       className={classes.splitInput}
-      disabled={isEmptyString(state.number)}
+      disabled={isEmptyString(props.state.number)}
       id="category"
       label="Category"
-      onChange={onChange}
+      onChange={props.onChange}
       select
-      value={state.category}
+      value={props.state.category}
       variant="filled"
     >
       {categoryOptions}

@@ -6,7 +6,13 @@ import {
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import { makeStyles } from "@material-ui/core/styles";
 
-interface DatePickerProps {
+const useStyles = makeStyles({
+  datepicker: (props: { width?: string }) => ({
+    width: props.width,
+  }),
+});
+
+export function DatePicker(props: {
   disabled?: boolean;
   label: string;
   onAccept: (date: MaterialUiPickersDate) => void;
@@ -14,44 +20,24 @@ interface DatePickerProps {
   pickerId: string;
   value: MaterialUiPickersDate;
   width?: string;
-}
-
-interface StyleProps {
-  width?: string;
-}
-
-const useStyles = makeStyles({
-  datepicker: ({ width }: StyleProps) => ({
-    width,
-  }),
-});
-
-export function DatePicker({
-  disabled,
-  label,
-  onAccept,
-  onChange,
-  pickerId,
-  value,
-  width,
-}: DatePickerProps) {
-  const classes = useStyles({ width });
+}) {
+  const classes = useStyles({ width: props.width });
 
   return (
     <MuiPickersUtilsProvider utils={DayjsUtils}>
       <MuiDatePicker
         autoOk
         className={classes.datepicker}
-        disabled={disabled}
+        disabled={props.disabled}
         disableFuture
         disableToolbar
         format="MM/DD/YYYY"
-        id={pickerId}
+        id={props.pickerId}
         inputVariant="filled"
-        label={label}
-        onAccept={onAccept}
-        onChange={onChange}
-        value={value}
+        label={props.label}
+        onAccept={props.onAccept}
+        onChange={props.onChange}
+        value={props.value}
       />
     </MuiPickersUtilsProvider>
   );

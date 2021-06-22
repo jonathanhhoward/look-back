@@ -5,12 +5,10 @@ import { DeferralState } from "../state";
 import { useStyles } from "../styles";
 import { types } from "../utils";
 
-interface TypeFieldProps {
+export function TypeField(props: {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   state: DeferralState;
-}
-
-export function TypeField({ onChange, state }: TypeFieldProps) {
+}) {
   const classes = useStyles();
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
@@ -23,9 +21,9 @@ export function TypeField({ onChange, state }: TypeFieldProps) {
       className={classes.input}
       id="type"
       label="Type"
-      onChange={onChange}
+      onChange={props.onChange}
       select
-      value={state.type}
+      value={props.state.type}
       variant="filled"
     >
       {typeOptions}
