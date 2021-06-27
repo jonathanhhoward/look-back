@@ -22,3 +22,5 @@ interface DayjsAction {
 }
 
 export type DeferralAction = StringAction | DayjsAction;
+
+export type DeferralDispatch = (action: DeferralAction) => void;

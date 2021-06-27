@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DatePicker, IntervalStatusText } from "components";
 import { useAutoCollapse } from "utils";
-import { DeferralState, reducer } from "./state";
+import { DeferralState, DispatchContext, reducer, useDispatch } from "./state";
 import { useStyles } from "./styles";
 import { categoryMap, isEmptyString, typeMap, types } from "./utils";
 
@@ -34,81 +34,44 @@ export function Deferral(props: {
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
-    dispatch({
-      type: "CHANGE_TYPE",
-      payload: event.target.value,
-    });
-  }
-
-  function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
-    dispatch({
-      type: "CHANGE_NUMBER",
-      payload: event.target.value,
-    });
-  }
-
-  function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
-    dispatch({
-      type: "CHANGE_CATEGORY",
-      payload: event.target.value,
-    });
-  }
-
-  function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
-    dispatch({
-      type: "CHANGE_DURATION",
-      payload: event.target.value,
-    });
-  }
-
-  function handleChangeDate(date: Dayjs | null) {
-    dispatch({
-      type: "CHANGE_DATE",
-      payload: date,
-    });
-  }
-
   return (
-    <Accordion expanded={expanded} onChange={changeExpanded}>
-      <AccordionSummary
-        aria-controls="deferral-details"
-        expandIcon={<ExpandMoreIcon />}
-        id="deferral-summary"
-      >
-        <Header state={state} />
-      </AccordionSummary>
-      <AccordionDetails>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={3}>
-            <TypeField onChange={handleChangeType} state={state} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <NumberField onChange={handleChangeNumber} state={state} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <CategoryField onChange={handleChangeCategory} state={state} />
-            <DurationField onChange={handleChangeDuration} state={state} />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <DateField
-              onAccept={autoCollapse}
-              onChange={handleChangeDate}
-              state={state}
-            />
-          </Grid>
-        </Grid>
-      </AccordionDetails>
-      <AccordionActions>
-        <IconButton
-          aria-label="delete deferral"
-          id={props.deleteId}
-          onClick={props.onClickDelete}
+    <DispatchContext.Provider value={dispatch}>
+      <Accordion expanded={expanded} onChange={changeExpanded}>
+        <AccordionSummary
+          aria-controls="deferral-details"
+          expandIcon={<ExpandMoreIcon />}
+          id="deferral-summary"
         >
-          <DeleteIcon />
-        </IconButton>
-      </AccordionActions>
-    </Accordion>
+          <Header state={state} />
+        </AccordionSummary>
+        <AccordionDetails>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={3}>
+              <TypeField state={state} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <NumberField state={state} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <CategoryField state={state} />
+              <DurationField state={state} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <DateField onAccept={autoCollapse} state={state} />
+            </Grid>
+          </Grid>
+        </AccordionDetails>
+        <AccordionActions>
+          <IconButton
+            aria-label="delete deferral"
+            id={props.deleteId}
+            onClick={props.onClickDelete}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </AccordionActions>
+      </Accordion>
+    </DispatchContext.Provider>
   );
 }
 
@@ -137,10 +100,8 @@ function Header(props: { state: DeferralState }) {
   );
 }
 
-function TypeField(props: {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  state: DeferralState;
-}) {
+function TypeField(props: { state: DeferralState }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
@@ -148,12 +109,19 @@ function TypeField(props: {
     </MenuItem>
   ));
 
+  function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "CHANGE_TYPE",
+      payload: event.target.value,
+    });
+  }
+
   return (
     <TextField
       className={classes.input}
       id="type"
       label="Type"
-      onChange={props.onChange}
+      onChange={handleChangeType}
       select
       value={props.state.type}
       variant="filled"
@@ -163,11 +131,16 @@ function TypeField(props: {
   );
 }
 
-function NumberField(props: {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  state: DeferralState;
-}) {
+function NumberField(props: { state: DeferralState }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "CHANGE_NUMBER",
+      payload: event.target.value,
+    });
+  }
 
   return (
     <TextField
@@ -175,17 +148,15 @@ function NumberField(props: {
       disabled={isEmptyString(props.state.type)}
       id="number"
       label="Number"
-      onChange={props.onChange}
+      onChange={handleChangeNumber}
       value={props.state.number}
       variant="filled"
     />
   );
 }
 
-function CategoryField(props: {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  state: DeferralState;
-}) {
+function CategoryField(props: { state: DeferralState }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const categories = typeMap.get(props.state.type);
   const categoryOptions =
@@ -199,13 +170,20 @@ function CategoryField(props: {
       ))
     );
 
+  function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "CHANGE_CATEGORY",
+      payload: event.target.value,
+    });
+  }
+
   return (
     <TextField
       className={classes.splitInput}
       disabled={isEmptyString(props.state.number)}
       id="category"
       label="Category"
-      onChange={props.onChange}
+      onChange={handleChangeCategory}
       select
       value={props.state.category}
       variant="filled"
@@ -215,12 +193,17 @@ function CategoryField(props: {
   );
 }
 
-function DurationField(props: {
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  state: DeferralState;
-}) {
+function DurationField(props: { state: DeferralState }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const disabled = categoryMap.get(props.state.category)?.disabled ?? true;
+
+  function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "CHANGE_DURATION",
+      payload: event.target.value,
+    });
+  }
 
   return (
     <TextField
@@ -229,7 +212,7 @@ function DurationField(props: {
       id="duration"
       inputProps={{ min: "1" }}
       label="Duration"
-      onChange={props.onChange}
+      onChange={handleChangeDuration}
       type="number"
       value={props.state.duration}
       variant="filled"
@@ -237,17 +220,22 @@ function DurationField(props: {
   );
 }
 
-function DateField(props: {
-  onAccept: () => void;
-  onChange: (date: Dayjs | null) => void;
-  state: DeferralState;
-}) {
+function DateField(props: { onAccept: () => void; state: DeferralState }) {
+  const dispatch = useDispatch();
+
+  function handleChangeDate(date: Dayjs | null) {
+    dispatch({
+      type: "CHANGE_DATE",
+      payload: date,
+    });
+  }
+
   return (
     <DatePicker
       disabled={isEmptyString(props.state.duration)}
       label="Deferral Date"
       onAccept={props.onAccept}
-      onChange={props.onChange}
+      onChange={handleChangeDate}
       pickerId="deferral-date"
       value={props.state.date}
       width="100%"
