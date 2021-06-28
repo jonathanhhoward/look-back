@@ -222,6 +222,7 @@ function DurationField(props: { state: DeferralState }) {
 
 function DateField(props: { onAccept: () => void; state: DeferralState }) {
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   function handleChangeDate(date: Dayjs | null) {
     dispatch({
@@ -232,13 +233,13 @@ function DateField(props: { onAccept: () => void; state: DeferralState }) {
 
   return (
     <DatePicker
+      classes={classes.input}
       disabled={isEmptyString(props.state.duration)}
       label="Deferral Date"
       onAccept={props.onAccept}
       onChange={handleChangeDate}
       pickerId="deferral-date"
       value={props.state.date}
-      width="100%"
     />
   );
 }
