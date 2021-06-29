@@ -48,13 +48,7 @@ export function Deferral(props: {
           <Form onAccept={autoCollapse} state={state} />
         </AccordionDetails>
         <AccordionActions>
-          <IconButton
-            aria-label="delete deferral"
-            id={props.deleteId}
-            onClick={props.onClickDelete}
-          >
-            <DeleteIcon />
-          </IconButton>
+          <DeleteButton id={props.deleteId} onClick={props.onClickDelete} />
         </AccordionActions>
       </Accordion>
     </DispatchContext.Provider>
@@ -247,5 +241,17 @@ function DateField(props: { onAccept: () => void; state: DeferralState }) {
       pickerId="deferral-date"
       value={props.state.date}
     />
+  );
+}
+
+function DeleteButton(props: { id: string; onClick: ReactEventHandler }) {
+  return (
+    <IconButton
+      aria-label="delete deferral"
+      id={props.id}
+      onClick={props.onClick}
+    >
+      <DeleteIcon />
+    </IconButton>
   );
 }
