@@ -8,11 +8,11 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DatePicker, IntervalStatusText } from "components";
+import { DatePicker } from "components";
 import { useAutoCollapse } from "utils";
+import { Header } from "./components";
 import { DeferralState, DispatchContext, reducer, useDispatch } from "./state";
 import { useStyles } from "./styles";
 import { categoryMap, isEmptyString, typeMap, types } from "./utils";
@@ -52,31 +52,6 @@ export function Deferral(props: {
         </AccordionActions>
       </Accordion>
     </DispatchContext.Provider>
-  );
-}
-
-function Header(props: { state: DeferralState }) {
-  const classes = useStyles();
-  const title = isEmptyString(props.state.title)
-    ? "Deferral Type"
-    : props.state.title;
-  const subtitle = isEmptyString(props.state.subtitle)
-    ? "Deferral Number"
-    : props.state.subtitle;
-
-  return (
-    <>
-      <Typography className={classes.title} variant="subtitle1">
-        <IntervalStatusText
-          date={props.state.date}
-          duration={Number(props.state.duration)}
-          text={title}
-        />
-      </Typography>
-      <Typography className={classes.subtitle} variant="subtitle1">
-        {subtitle}
-      </Typography>
-    </>
   );
 }
 
