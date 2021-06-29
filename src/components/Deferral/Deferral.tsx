@@ -45,21 +45,7 @@ export function Deferral(props: {
           <Header state={state} />
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={3}>
-              <TypeField state={state} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <NumberField state={state} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <CategoryField state={state} />
-              <DurationField state={state} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <DateField onAccept={autoCollapse} state={state} />
-            </Grid>
-          </Grid>
+          <Form onAccept={autoCollapse} state={state} />
         </AccordionDetails>
         <AccordionActions>
           <IconButton
@@ -97,6 +83,26 @@ function Header(props: { state: DeferralState }) {
         {subtitle}
       </Typography>
     </>
+  );
+}
+
+function Form(props: { onAccept: () => void; state: DeferralState }) {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={6} md={3}>
+        <TypeField state={props.state} />
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <NumberField state={props.state} />
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <CategoryField state={props.state} />
+        <DurationField state={props.state} />
+      </Grid>
+      <Grid item xs={12} sm={6} md={3}>
+        <DateField onAccept={props.onAccept} state={props.state} />
+      </Grid>
+    </Grid>
   );
 }
 
