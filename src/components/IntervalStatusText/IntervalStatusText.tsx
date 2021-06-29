@@ -11,15 +11,14 @@ export function IntervalStatusText(props: {
   let bgcolor: StatusBgcolor;
   if (props.date) {
     const days = dayjs().diff(props.date, "days");
-    color =
-      days < props.duration
-        ? Status.okay
-        : days === props.duration
-        ? Status.due
-        : Status.overdueText;
-  }
-  if (color === Status.overdueText) {
-    bgcolor = Status.overdueBg;
+    if (days > props.duration) {
+      color = Status.overdueText;
+      bgcolor = Status.overdueBg;
+    } else if (days === props.duration) {
+      color = Status.due;
+    } else {
+      color = Status.okay;
+    }
   }
 
   return (
