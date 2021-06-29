@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import { Dayjs } from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -10,20 +10,36 @@ import { categoryMap, isEmptyString, typeMap, types } from "../utils";
 
 export function Form(props: { onAccept: () => void; state: DeferralState }) {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={6} md={3}>
+    <GridContainer>
+      <GridItem>
         <TypeField state={props.state} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      </GridItem>
+      <GridItem>
         <NumberField state={props.state} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      </GridItem>
+      <GridItem>
         <CategoryField state={props.state} />
         <DurationField state={props.state} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      </GridItem>
+      <GridItem>
         <DateField onAccept={props.onAccept} state={props.state} />
-      </Grid>
+      </GridItem>
+    </GridContainer>
+  );
+}
+
+function GridContainer(props: { children: ReactNode }) {
+  return (
+    <Grid container spacing={2}>
+      {props.children}
+    </Grid>
+  );
+}
+
+function GridItem(props: { children: ReactNode }) {
+  return (
+    <Grid item xs={12} sm={6} md={3}>
+      {props.children}
     </Grid>
   );
 }
