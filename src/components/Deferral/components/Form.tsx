@@ -3,7 +3,7 @@ import { Dayjs } from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import { DatePicker } from "components/DatePicker";
+import { DatePicker } from "components";
 import { DeferralState, useDispatch } from "../state";
 import { useStyles } from "../styles";
 import { categoryMap, isEmptyString, typeMap, types } from "../utils";
