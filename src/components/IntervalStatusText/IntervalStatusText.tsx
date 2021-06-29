@@ -1,6 +1,6 @@
 import Box from "@material-ui/core/Box";
 import dayjs, { Dayjs } from "dayjs";
-import { StatusBgcolor, StatusColor } from "./types";
+import { Status, StatusBgcolor, StatusColor } from "./types";
 
 export function IntervalStatusText(props: {
   date: Dayjs | null;
@@ -13,13 +13,13 @@ export function IntervalStatusText(props: {
     const days = dayjs().diff(props.date, "days");
     color =
       days < props.duration
-        ? "success.main"
+        ? Status.okay
         : days === props.duration
-        ? "warning.main"
-        : "error.contrastText";
+        ? Status.due
+        : Status.overdueText;
   }
-  if (color === "error.contrastText") {
-    bgcolor = "error.main";
+  if (color === Status.overdueText) {
+    bgcolor = Status.overdueBg;
   }
 
   return (
