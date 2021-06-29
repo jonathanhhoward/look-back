@@ -3,11 +3,9 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionActions from "@material-ui/core/AccordionActions";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useAutoCollapse } from "utils";
-import { Form, Header } from "./components";
+import { DeleteButton, Form, Header } from "./components";
 import { DeferralState, DispatchContext, reducer } from "./state";
 
 const initialState: DeferralState = {
@@ -45,17 +43,5 @@ export function Deferral(props: {
         </AccordionActions>
       </Accordion>
     </DispatchContext.Provider>
-  );
-}
-
-function DeleteButton(props: { id: string; onClick: ReactEventHandler }) {
-  return (
-    <IconButton
-      aria-label="delete deferral"
-      id={props.id}
-      onClick={props.onClick}
-    >
-      <DeleteIcon />
-    </IconButton>
   );
 }
