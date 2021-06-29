@@ -24,11 +24,7 @@ export function DeferralList() {
     <Card elevation={0} square>
       <CardHeader
         title="Deferral"
-        action={
-          <IconButton aria-label="add deferral" onClick={handleAddDeferral}>
-            <AddIcon />
-          </IconButton>
-        }
+        action={<AddButton onClick={handleAddDeferral} />}
       />
       <CardContent>
         {deferrals.map((deferral) => (
@@ -40,5 +36,13 @@ export function DeferralList() {
         ))}
       </CardContent>
     </Card>
+  );
+}
+
+function AddButton(props: { onClick: () => void }) {
+  return (
+    <IconButton aria-label="add deferral" onClick={props.onClick}>
+      <AddIcon />
+    </IconButton>
   );
 }
