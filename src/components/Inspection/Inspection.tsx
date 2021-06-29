@@ -5,7 +5,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { DatePicker, IntervalStatusText } from "components";
+import { DatePicker, StatusColorText } from "components";
 import { useAutoCollapse } from "utils";
 
 export function Inspection(props: { title: string; duration: number }) {
@@ -20,7 +20,7 @@ export function Inspection(props: { title: string; duration: number }) {
         id="inspection-summary"
       >
         <Typography variant="subtitle1">
-          <IntervalStatusText
+          <StatusColorText
             date={date}
             duration={props.duration}
             text={props.title}

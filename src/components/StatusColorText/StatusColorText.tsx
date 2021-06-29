@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import dayjs, { Dayjs } from "dayjs";
 import { Status, StatusBgcolor, StatusColor } from "./types";
 
-export function IntervalStatusText(props: {
+export function StatusColorText(props: {
   date: Dayjs | null;
   duration: number;
   text: string;

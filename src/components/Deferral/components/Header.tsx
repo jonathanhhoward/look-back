@@ -1,5 +1,5 @@
 import Typography from "@material-ui/core/Typography";
-import { IntervalStatusText } from "components";
+import { StatusColorText } from "components";
 import { DeferralState } from "../state";
 import { useStyles } from "../styles";
 import { isEmptyString } from "../utils";
@@ -16,7 +16,7 @@ export function Header(props: { state: DeferralState }) {
   return (
     <>
       <Typography className={classes.title} variant="subtitle1">
-        <IntervalStatusText
+        <StatusColorText
           date={props.state.date}
           duration={Number(props.state.duration)}
           text={title}
