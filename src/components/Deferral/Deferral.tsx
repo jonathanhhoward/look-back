@@ -1,4 +1,4 @@
-import { ReactEventHandler, useReducer } from "react";
+import { ReactEventHandler } from "react";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionActions from "@material-ui/core/AccordionActions";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -6,28 +6,16 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useAutoCollapse } from "utils";
 import { DeleteButton, Form, Header } from "./components";
-import { DeferralContext, reducer } from "./state";
-import { DeferralState } from "./types";
-
-const initialState: DeferralState = {
-  title: "",
-  subtitle: "",
-  type: "",
-  number: "",
-  category: "",
-  duration: "",
-  date: null,
-};
+import { DeferralProvider } from "./state";
 
 export function Deferral(props: {
   deleteId: string;
   onClickDelete: ReactEventHandler;
 }) {
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
-  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <DeferralContext.Provider value={{ state, dispatch }}>
+    <DeferralProvider>
       <Accordion expanded={expanded} onChange={changeExpanded}>
         <AccordionSummary
           aria-controls="deferral-details"
@@ -43,6 +31,6 @@ export function Deferral(props: {
           <DeleteButton id={props.deleteId} onClick={props.onClickDelete} />
         </AccordionActions>
       </Accordion>
-    </DeferralContext.Provider>
+    </DeferralProvider>
   );
 }
