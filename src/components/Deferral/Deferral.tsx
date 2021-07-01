@@ -6,7 +6,8 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useAutoCollapse } from "utils";
 import { DeleteButton, Form, Header } from "./components";
-import { DeferralState, DeferralContext, reducer } from "./state";
+import { DeferralContext, reducer } from "./state";
+import { DeferralState } from "./types";
 
 const initialState: DeferralState = {
   title: "",

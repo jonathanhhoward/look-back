@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { DeferralDispatch, DeferralState } from "./types";
+import { DeferralDispatch, DeferralState } from "../types";
 
 interface Context {
   state: DeferralState;
