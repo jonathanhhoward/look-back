@@ -6,7 +6,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useAutoCollapse } from "utils";
 import { DeleteButton, Form, Header } from "./components";
-import { DeferralState, DispatchContext, reducer } from "./state";
+import { DeferralState, DeferralContext, reducer } from "./state";
 
 const initialState: DeferralState = {
   title: "",
@@ -26,22 +26,22 @@ export function Deferral(props: {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <DispatchContext.Provider value={dispatch}>
+    <DeferralContext.Provider value={{ state, dispatch }}>
       <Accordion expanded={expanded} onChange={changeExpanded}>
         <AccordionSummary
           aria-controls="deferral-details"
           expandIcon={<ExpandMoreIcon />}
           id="deferral-summary"
         >
-          <Header state={state} />
+          <Header />
         </AccordionSummary>
         <AccordionDetails>
-          <Form onAccept={autoCollapse} state={state} />
+          <Form onAccept={autoCollapse} />
         </AccordionDetails>
         <AccordionActions>
           <DeleteButton id={props.deleteId} onClick={props.onClickDelete} />
         </AccordionActions>
       </Accordion>
-    </DispatchContext.Provider>
+    </DeferralContext.Provider>
   );
 }

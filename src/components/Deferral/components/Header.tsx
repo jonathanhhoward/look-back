@@ -1,24 +1,23 @@
 import Typography from "@material-ui/core/Typography";
 import { StatusColorText } from "components";
-import { DeferralState } from "../state";
+import { useDeferral } from "../state";
 import { useStyles } from "../styles";
 import { isEmptyString } from "../utils";
 
-export function Header(props: { state: DeferralState }) {
+export function Header() {
+  const { state } = useDeferral();
   const classes = useStyles();
-  const title = isEmptyString(props.state.title)
-    ? "Deferral Type"
-    : props.state.title;
-  const subtitle = isEmptyString(props.state.subtitle)
+  const title = isEmptyString(state.title) ? "Deferral Type" : state.title;
+  const subtitle = isEmptyString(state.subtitle)
     ? "Deferral Number"
-    : props.state.subtitle;
+    : state.subtitle;
 
   return (
     <>
       <Typography className={classes.title} variant="subtitle1">
         <StatusColorText
-          date={props.state.date}
-          duration={Number(props.state.duration)}
+          date={state.date}
+          duration={Number(state.duration)}
           text={title}
         />
       </Typography>

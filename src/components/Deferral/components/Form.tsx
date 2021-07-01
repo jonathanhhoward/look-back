@@ -4,25 +4,25 @@ import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { DatePicker } from "components";
-import { DeferralState, useDispatch } from "../state";
+import { useDeferral } from "../state";
 import { useStyles } from "../styles";
 import { categoryMap, isEmptyString, typeMap, types } from "../utils";
 
-export function Form(props: { onAccept: () => void; state: DeferralState }) {
+export function Form(props: { onAccept: () => void }) {
   return (
     <GridContainer>
       <GridItem>
-        <TypeField state={props.state} />
+        <TypeField />
       </GridItem>
       <GridItem>
-        <NumberField state={props.state} />
+        <NumberField />
       </GridItem>
       <GridItem>
-        <CategoryField state={props.state} />
-        <DurationField state={props.state} />
+        <CategoryField />
+        <DurationField />
       </GridItem>
       <GridItem>
-        <DateField onAccept={props.onAccept} state={props.state} />
+        <DateField onAccept={props.onAccept} />
       </GridItem>
     </GridContainer>
   );
@@ -44,8 +44,8 @@ function GridItem(props: { children: ReactNode }) {
   );
 }
 
-function TypeField(props: { state: DeferralState }) {
-  const dispatch = useDispatch();
+function TypeField() {
+  const { state, dispatch } = useDeferral();
   const classes = useStyles();
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
@@ -67,7 +67,7 @@ function TypeField(props: { state: DeferralState }) {
       label="Type"
       onChange={handleChangeType}
       select
-      value={props.state.type}
+      value={state.type}
       variant="filled"
     >
       {typeOptions}
@@ -75,8 +75,8 @@ function TypeField(props: { state: DeferralState }) {
   );
 }
 
-function NumberField(props: { state: DeferralState }) {
-  const dispatch = useDispatch();
+function NumberField() {
+  const { state, dispatch } = useDeferral();
   const classes = useStyles();
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
@@ -89,20 +89,20 @@ function NumberField(props: { state: DeferralState }) {
   return (
     <TextField
       className={classes.input}
-      disabled={isEmptyString(props.state.type)}
+      disabled={isEmptyString(state.type)}
       id="number"
       label="Number"
       onChange={handleChangeNumber}
-      value={props.state.number}
+      value={state.number}
       variant="filled"
     />
   );
 }
 
-function CategoryField(props: { state: DeferralState }) {
-  const dispatch = useDispatch();
+function CategoryField() {
+  const { state, dispatch } = useDeferral();
   const classes = useStyles();
-  const categories = typeMap.get(props.state.type);
+  const categories = typeMap.get(state.type);
   const categoryOptions =
     categories === undefined ? (
       <MenuItem />
@@ -124,12 +124,12 @@ function CategoryField(props: { state: DeferralState }) {
   return (
     <TextField
       className={classes.splitInput}
-      disabled={isEmptyString(props.state.number)}
+      disabled={isEmptyString(state.number)}
       id="category"
       label="Category"
       onChange={handleChangeCategory}
       select
-      value={props.state.category}
+      value={state.category}
       variant="filled"
     >
       {categoryOptions}
@@ -137,10 +137,10 @@ function CategoryField(props: { state: DeferralState }) {
   );
 }
 
-function DurationField(props: { state: DeferralState }) {
-  const dispatch = useDispatch();
+function DurationField() {
+  const { state, dispatch } = useDeferral();
   const classes = useStyles();
-  const disabled = categoryMap.get(props.state.category)?.disabled ?? true;
+  const disabled = categoryMap.get(state.category)?.disabled ?? true;
 
   function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
     dispatch({
@@ -158,14 +158,14 @@ function DurationField(props: { state: DeferralState }) {
       label="Duration"
       onChange={handleChangeDuration}
       type="number"
-      value={props.state.duration}
+      value={state.duration}
       variant="filled"
     />
   );
 }
 
-function DateField(props: { onAccept: () => void; state: DeferralState }) {
-  const dispatch = useDispatch();
+function DateField(props: { onAccept: () => void }) {
+  const { state, dispatch } = useDeferral();
   const classes = useStyles();
 
   function handleChangeDate(date: Dayjs | null) {
@@ -178,12 +178,12 @@ function DateField(props: { onAccept: () => void; state: DeferralState }) {
   return (
     <DatePicker
       classes={classes.input}
-      disabled={isEmptyString(props.state.duration)}
+      disabled={isEmptyString(state.duration)}
       label="Deferral Date"
       onAccept={props.onAccept}
       onChange={handleChangeDate}
       pickerId="deferral-date"
-      value={props.state.date}
+      value={state.date}
     />
   );
 }

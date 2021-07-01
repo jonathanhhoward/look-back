@@ -1,12 +1,15 @@
 import { createContext, useContext } from "react";
-import { DeferralDispatch } from "./types";
+import { DeferralDispatch, DeferralState } from "./types";
 
-export const DispatchContext = createContext<DeferralDispatch | undefined>(
-  undefined
-);
+interface Context {
+  state: DeferralState;
+  dispatch: DeferralDispatch;
+}
 
-export function useDispatch() {
-  const context = useContext(DispatchContext);
+export const DeferralContext = createContext<Context | undefined>(undefined);
+
+export function useDeferral() {
+  const context = useContext(DeferralContext);
   if (context === undefined) {
     throw new Error(
       "useDispatch must be used within a DispatchContext.Provider"
