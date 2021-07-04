@@ -7,10 +7,8 @@ import { useDarkMode } from "lib/useDarkMode";
 import "@fontsource/roboto";
 
 export function App() {
-  const theme = useDarkMode();
-
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={useDarkMode()}>
       <CssBaseline />
       <TitleBar />
       <InspectionList />
