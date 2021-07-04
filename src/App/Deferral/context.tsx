@@ -32,9 +32,7 @@ export const DeferralProvider: FC = ({ children }) => {
 export function useDeferral() {
   const context = useContext(DeferralContext);
   if (context === undefined) {
-    throw new Error(
-      "useDispatch must be used within a DispatchContext.Provider"
-    );
+    throw new Error("useDeferral must be used within a DeferralProvider");
   }
   return context;
 }
