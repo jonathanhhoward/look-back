@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from "react";
+import { ChangeEvent, FC } from "react";
 import { Dayjs } from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -29,21 +29,17 @@ export function Form(props: { onAccept: () => void }) {
   );
 }
 
-function GridContainer(props: { children: ReactNode }) {
-  return (
-    <Grid container spacing={2}>
-      {props.children}
-    </Grid>
-  );
-}
+const GridContainer: FC = (props) => (
+  <Grid container spacing={2}>
+    {props.children}
+  </Grid>
+);
 
-function GridItem(props: { children: ReactNode }) {
-  return (
-    <Grid item xs={12} sm={6} md={3}>
-      {props.children}
-    </Grid>
-  );
-}
+const GridItem: FC = (props) => (
+  <Grid item xs={12} sm={6} md={3}>
+    {props.children}
+  </Grid>
+);
 
 function TypeField() {
   const { state, dispatch } = useDeferral();

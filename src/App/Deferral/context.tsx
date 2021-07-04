@@ -19,12 +19,12 @@ const initialState: DeferralState = {
   date: null,
 };
 
-export const DeferralProvider: FC = ({ children }) => {
+export const DeferralProvider: FC = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <DeferralContext.Provider value={{ state, dispatch }}>
-      {children}
+      {props.children}
     </DeferralContext.Provider>
   );
 };
