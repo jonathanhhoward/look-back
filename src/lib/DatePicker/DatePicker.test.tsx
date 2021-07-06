@@ -8,10 +8,10 @@ const handleChange = jest.fn();
 test("renders a datepicker", () => {
   render(
     <DatePicker
+      id="picker"
       label="picker label"
       onAccept={handleAccept}
       onChange={handleChange}
-      pickerId="picker"
       value=""
     />
   );

@@ -30,10 +30,10 @@ export function Inspection(props: { title: string; duration: number }) {
       </AccordionSummary>
       <AccordionDetails>
         <DatePicker
+          id={props.title}
           label="Inspection Date"
           onAccept={autoCollapse}
           onChange={setDate}
-          pickerId={props.title}
           value={date}
         />
       </AccordionDetails>

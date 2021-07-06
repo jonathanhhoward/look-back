@@ -8,10 +8,10 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 export function DatePicker(props: {
   classes?: string;
   disabled?: boolean;
+  id: string;
   label: string;
   onAccept: (date: MaterialUiPickersDate) => void;
   onChange: (date: MaterialUiPickersDate) => void;
-  pickerId: string;
   value: MaterialUiPickersDate;
 }) {
   return (
@@ -23,7 +23,7 @@ export function DatePicker(props: {
         disableFuture
         disableToolbar
         format="MM/DD/YYYY"
-        id={props.pickerId}
+        id={props.id}
         inputVariant="filled"
         label={props.label}
         onAccept={props.onAccept}

@@ -176,10 +176,10 @@ function DateField(props: { onAccept: () => void }) {
     <DatePicker
       classes={classes.input}
       disabled={isEmptyString(state.duration)}
+      id="deferral-date"
       label="Deferral Date"
       onAccept={props.onAccept}
       onChange={handleChangeDate}
-      pickerId="deferral-date"
       value={state.date}
     />
   );
