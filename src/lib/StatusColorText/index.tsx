@@ -10,11 +10,11 @@ export function StatusColorText(props: {
   let color: StatusColor;
   let bgcolor: StatusBgcolor;
   if (props.date) {
-    const days = dayjs().diff(props.date, "days");
-    if (days > props.duration) {
+    const daysSinceDate = dayjs().diff(props.date, "days");
+    if (daysSinceDate > props.duration) {
       color = Status.overdueText;
       bgcolor = Status.overdueBg;
-    } else if (days === props.duration) {
+    } else if (daysSinceDate === props.duration) {
       color = Status.due;
     } else {
       color = Status.okay;
