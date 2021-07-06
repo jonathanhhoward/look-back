@@ -7,7 +7,7 @@ const { palette } = createMuiTheme();
 const handleDelete = jest.fn();
 
 beforeEach(() => {
-  render(<Deferral deleteId="delete" onClickDelete={handleDelete} />);
+  render(<Deferral id="delete" onClickDelete={handleDelete} />);
 });
 
 test("renders the title", () => {

@@ -11,7 +11,7 @@ import { Header } from "App/Deferral/Header";
 import { useAutoCollapse } from "lib/useAutoCollapse";
 
 export function Deferral(props: {
-  deleteId: string;
+  id: string;
   onClickDelete: ReactEventHandler;
 }) {
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
@@ -30,7 +30,7 @@ export function Deferral(props: {
           <Form onAccept={autoCollapse} />
         </AccordionDetails>
         <AccordionActions>
-          <DeleteButton id={props.deleteId} onClick={props.onClickDelete} />
+          <DeleteButton id={props.id} onClick={props.onClickDelete} />
         </AccordionActions>
       </Accordion>
     </DeferralProvider>

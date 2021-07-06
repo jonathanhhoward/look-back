@@ -11,8 +11,8 @@ export function DeferralList() {
   const [deferrals, setDeferrals] = useState<{ id: string }[]>([]);
   const deferralList = deferrals.map((deferral) => (
     <Deferral
+      id={deferral.id}
       key={deferral.id}
-      deleteId={deferral.id}
       onClickDelete={handleDeleteDeferral}
     />
   ));
