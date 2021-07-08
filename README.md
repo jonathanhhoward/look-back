@@ -1,3 +1,3 @@
 # Look Back
 
-A tool for checking inspection due dates for Republic Airways.
+A tool for checking maintenance due dates for Republic Airways aircraft.
