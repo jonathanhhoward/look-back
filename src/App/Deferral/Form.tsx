@@ -3,7 +3,7 @@ import { Dayjs } from "dayjs";
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
-import { useDeferral } from "App/Deferral/context";
+import { useDeferralContext } from "App/Deferral/context";
 import { categoryMap, typeMap, types } from "App/Deferral/datasets";
 import { useStyles } from "App/Deferral/styles";
 import { DatePicker } from "lib/DatePicker";
@@ -42,7 +42,7 @@ const GridItem: FC = (props) => (
 );
 
 function TypeField() {
-  const { state, dispatch } = useDeferral();
+  const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
   const typeOptions = types.map((type) => (
     <MenuItem key={type} value={type}>
@@ -73,7 +73,7 @@ function TypeField() {
 }
 
 function NumberField() {
-  const { state, dispatch } = useDeferral();
+  const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
 
   function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
@@ -97,7 +97,7 @@ function NumberField() {
 }
 
 function CategoryField() {
-  const { state, dispatch } = useDeferral();
+  const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
   const categories = typeMap.get(state.type);
   const categoryOptions =
@@ -135,7 +135,7 @@ function CategoryField() {
 }
 
 function DurationField() {
-  const { state, dispatch } = useDeferral();
+  const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
   const disabled = categoryMap.get(state.category)?.disabled ?? true;
 
@@ -162,7 +162,7 @@ function DurationField() {
 }
 
 function DateField(props: { onAccept: () => void }) {
-  const { state, dispatch } = useDeferral();
+  const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
 
   function handleChangeDate(date: Dayjs | null) {

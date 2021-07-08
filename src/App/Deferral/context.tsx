@@ -8,11 +8,11 @@ interface Context {
 
 export const DeferralContext = createContext<Context | undefined>(undefined);
 
-export function useDeferral() {
+export function useDeferralContext() {
   const context = useContext(DeferralContext);
   if (context === undefined) {
     throw new Error(
-      "useDeferral must be used within a DeferralContext.Provider"
+      "useDeferralContext must be used within a DeferralContext.Provider"
     );
   }
   return context;

@@ -1,11 +1,11 @@
 import Typography from "@material-ui/core/Typography";
-import { useDeferral } from "App/Deferral/context";
+import { useDeferralContext } from "App/Deferral/context";
 import { useStyles } from "App/Deferral/styles";
 import { isEmptyString } from "lib/isEmptyString";
 import { StatusColorText } from "lib/StatusColorText";
 
 export function Header() {
-  const { state } = useDeferral();
+  const { state } = useDeferralContext();
   const classes = useStyles();
   const title = isEmptyString(state.title) ? "Deferral Type" : state.title;
   const subtitle = isEmptyString(state.subtitle)
