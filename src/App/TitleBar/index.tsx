@@ -4,10 +4,14 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Refresh from "@material-ui/icons/Refresh";
 import { makeStyles } from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   title: {
     flexGrow: 1,
+  },
+  refresh: {
+    color: grey[100],
   },
 });
 
@@ -26,7 +30,7 @@ export function TitleBar() {
           Look Back
         </Typography>
         <IconButton aria-label="reset page" onClick={handleReset}>
-          <Refresh />
+          <Refresh className={classes.refresh} />
         </IconButton>
       </Toolbar>
     </AppBar>
