@@ -8,9 +8,9 @@ import { DeferralContext } from "App/Deferral/context";
 import { DeleteButton } from "App/Deferral/DeleteButton";
 import { Form } from "App/Deferral/Form";
 import { Header } from "App/Deferral/Header";
-import { useAutoCollapse } from "lib/useAutoCollapse";
-import { DeferralState } from "App/Deferral/types";
 import { reducer } from "App/Deferral/reducer";
+import { DeferralState } from "App/Deferral/types";
+import { useAutoCollapse } from "lib/useAutoCollapse";
 import { useSessionReducer } from "lib/useSessionReducer";
 
 const initialState: DeferralState = {

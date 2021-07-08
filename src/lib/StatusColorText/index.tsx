@@ -1,5 +1,5 @@
-import Box from "@material-ui/core/Box";
 import dayjs, { Dayjs } from "dayjs";
+import Box from "@material-ui/core/Box";
 import { Status, StatusBgcolor, StatusColor } from "lib/StatusColorText/types";
 
 export function StatusColorText(props: {
