@@ -1,5 +1,4 @@
-import { createContext, FC, useContext, useReducer } from "react";
-import { reducer } from "App/Deferral/reducer";
+import { createContext, useContext } from "react";
 import { DeferralDispatch, DeferralState } from "App/Deferral/types";
 
 interface Context {
@@ -7,32 +6,14 @@ interface Context {
   dispatch: DeferralDispatch;
 }
 
-const DeferralContext = createContext<Context | undefined>(undefined);
-
-const initialState: DeferralState = {
-  title: "",
-  subtitle: "",
-  type: "",
-  number: "",
-  category: "",
-  duration: "",
-  date: null,
-};
-
-export const DeferralProvider: FC = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  return (
-    <DeferralContext.Provider value={{ state, dispatch }}>
-      {props.children}
-    </DeferralContext.Provider>
-  );
-};
+export const DeferralContext = createContext<Context | undefined>(undefined);
 
 export function useDeferral() {
   const context = useContext(DeferralContext);
   if (context === undefined) {
-    throw new Error("useDeferral must be used within a DeferralProvider");
+    throw new Error(
+      "useDeferral must be used within a DeferralContext.Provider"
+    );
   }
   return context;
 }

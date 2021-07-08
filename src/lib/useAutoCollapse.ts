@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export function useAutoCollapse() {
-  const [expanded, setExpanded] = useState(true);
+export function useAutoCollapse(initialExpanded: boolean = true) {
+  const [expanded, setExpanded] = useState(initialExpanded);
 
   function changeExpanded(_event: any, isExpanded: boolean) {
     setExpanded(isExpanded);

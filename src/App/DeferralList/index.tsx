@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 import { nanoid } from "nanoid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -6,9 +6,17 @@ import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import { Deferral } from "App/Deferral";
+import { useSessionState } from "lib/useSessionState";
+
+interface DeferralId {
+  id: string;
+}
 
 export function DeferralList() {
-  const [deferrals, setDeferrals] = useState<{ id: string }[]>([]);
+  const [deferrals, setDeferrals] = useSessionState<DeferralId[]>(
+    "deferrals",
+    []
+  );
   const deferralList = deferrals.map((deferral) => (
     <Deferral
       id={deferral.id}

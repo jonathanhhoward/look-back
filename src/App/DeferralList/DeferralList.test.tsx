@@ -26,7 +26,7 @@ test("renders new deferral on add button click", () => {
 test("removes a deferral when its delete button is clicked", () => {
   const addButton = screen.getByLabelText(/^add deferral$/i);
   userEvent.click(addButton);
-  const deleteButton = screen.getByLabelText(/^delete deferral$/i);
+  const deleteButton = screen.getAllByLabelText(/^delete deferral$/i)[0];
   expect(deleteButton).toBeInTheDocument();
   userEvent.click(deleteButton);
   expect(deleteButton).not.toBeInTheDocument();

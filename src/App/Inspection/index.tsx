@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Dayjs } from "dayjs";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -8,10 +7,13 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DatePicker } from "lib/DatePicker";
 import { StatusColorText } from "lib/StatusColorText";
 import { useAutoCollapse } from "lib/useAutoCollapse";
+import { useSessionState } from "lib/useSessionState";
 
 export function Inspection(props: { title: string; duration: number }) {
-  const [date, setDate] = useState<Dayjs | null>(null);
-  const { expanded, changeExpanded, autoCollapse } = useAutoCollapse();
+  const [date, setDate] = useSessionState<Dayjs | null>(props.title, null);
+  const { expanded, changeExpanded, autoCollapse } = useAutoCollapse(
+    date === null
+  );
 
   return (
     <Accordion expanded={expanded} onChange={changeExpanded}>
