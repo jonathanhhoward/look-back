@@ -3,17 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Refresh from "@material-ui/icons/Refresh";
-import { makeStyles } from "@material-ui/core/styles";
-import { grey } from "@material-ui/core/colors";
-
-const useStyles = makeStyles({
-  title: {
-    flexGrow: 1,
-  },
-  refresh: {
-    color: grey[100],
-  },
-});
+import { useStyles } from "App/TitleBar/styles";
 
 export function TitleBar() {
   const classes = useStyles();
