@@ -21,15 +21,15 @@ export function DeferralList() {
     <Deferral
       id={deferral.id}
       key={deferral.id}
-      onClickDelete={handleDeleteDeferral}
+      onClickDelete={deleteDeferral}
     />
   ));
 
-  function handleAddDeferral() {
+  function addDeferral() {
     setDeferrals(deferrals.concat({ id: `deferral-${nanoid()}` }));
   }
 
-  function handleDeleteDeferral(event: MouseEvent<HTMLElement>) {
+  function deleteDeferral(event: MouseEvent<HTMLElement>) {
     setDeferrals(
       deferrals.filter((deferral) => deferral.id !== event.currentTarget.id)
     );
@@ -39,7 +39,7 @@ export function DeferralList() {
     <Card elevation={0} square>
       <CardHeader
         title="Deferral"
-        action={<AddButton onClick={handleAddDeferral} />}
+        action={<AddButton onClick={addDeferral} />}
       />
       <CardContent>{deferralList}</CardContent>
     </Card>

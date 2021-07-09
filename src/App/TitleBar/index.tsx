@@ -8,7 +8,7 @@ import { useStyles } from "App/TitleBar/styles";
 export function TitleBar() {
   const classes = useStyles();
 
-  function handleReset() {
+  function clearAppState() {
     sessionStorage.clear();
     window.location.reload();
   }
@@ -19,7 +19,7 @@ export function TitleBar() {
         <Typography variant="h4" component="h1" className={classes.title}>
           Look Back
         </Typography>
-        <IconButton aria-label="reset page" onClick={handleReset}>
+        <IconButton aria-label="reset page" onClick={clearAppState}>
           <Refresh className={classes.refresh} />
         </IconButton>
       </Toolbar>

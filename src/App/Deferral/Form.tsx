@@ -50,7 +50,7 @@ function TypeField() {
     </MenuItem>
   ));
 
-  function handleChangeType(event: ChangeEvent<HTMLInputElement>) {
+  function changeType(event: ChangeEvent<HTMLInputElement>) {
     dispatch({
       type: "CHANGE_TYPE",
       payload: event.target.value,
@@ -62,7 +62,7 @@ function TypeField() {
       className={classes.input}
       id="type"
       label="Type"
-      onChange={handleChangeType}
+      onChange={changeType}
       select
       value={state.type}
       variant="filled"
@@ -76,7 +76,7 @@ function NumberField() {
   const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
 
-  function handleChangeNumber(event: ChangeEvent<HTMLInputElement>) {
+  function changeNumber(event: ChangeEvent<HTMLInputElement>) {
     dispatch({
       type: "CHANGE_NUMBER",
       payload: event.target.value,
@@ -89,7 +89,7 @@ function NumberField() {
       disabled={isEmptyString(state.type)}
       id="number"
       label="Number"
-      onChange={handleChangeNumber}
+      onChange={changeNumber}
       value={state.number}
       variant="filled"
     />
@@ -111,7 +111,7 @@ function CategoryField() {
       ))
     );
 
-  function handleChangeCategory(event: ChangeEvent<HTMLInputElement>) {
+  function changeCategory(event: ChangeEvent<HTMLInputElement>) {
     dispatch({
       type: "CHANGE_CATEGORY",
       payload: event.target.value,
@@ -124,7 +124,7 @@ function CategoryField() {
       disabled={isEmptyString(state.number)}
       id="category"
       label="Category"
-      onChange={handleChangeCategory}
+      onChange={changeCategory}
       select
       value={state.category}
       variant="filled"
@@ -139,7 +139,7 @@ function DurationField() {
   const classes = useStyles();
   const disabled = categoryMap.get(state.category)?.disabled ?? true;
 
-  function handleChangeDuration(event: ChangeEvent<HTMLInputElement>) {
+  function changeDuration(event: ChangeEvent<HTMLInputElement>) {
     dispatch({
       type: "CHANGE_DURATION",
       payload: event.target.value,
@@ -153,7 +153,7 @@ function DurationField() {
       id="duration"
       inputProps={{ min: "1" }}
       label="Duration"
-      onChange={handleChangeDuration}
+      onChange={changeDuration}
       type="number"
       value={state.duration}
       variant="filled"
@@ -165,7 +165,7 @@ function DateField(props: { onAccept: () => void }) {
   const { state, dispatch } = useDeferralContext();
   const classes = useStyles();
 
-  function handleChangeDate(date: Dayjs | null) {
+  function changeDate(date: Dayjs | null) {
     dispatch({
       type: "CHANGE_DATE",
       payload: date,
@@ -179,7 +179,7 @@ function DateField(props: { onAccept: () => void }) {
       id="deferral-date"
       label="Deferral Date"
       onAccept={props.onAccept}
-      onChange={handleChangeDate}
+      onChange={changeDate}
       value={state.date}
     />
   );
