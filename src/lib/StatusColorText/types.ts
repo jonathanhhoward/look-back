@@ -1,14 +1,9 @@
 export enum Status {
   okay = "success.main",
   due = "warning.main",
-  overdueText = "error.contrastText",
-  overdueBg = "error.main",
+  overdue = "error.main",
 }
 
-export type StatusColor =
-  | Status.okay
-  | Status.due
-  | Status.overdueText
-  | undefined;
+export type StatusColor = Status.okay | Status.due | Status.overdue | undefined;
 
-export type StatusBgcolor = Status.overdueBg | undefined;
+export type TextColor = "primary.contrastText" | undefined;

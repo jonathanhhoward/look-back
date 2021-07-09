@@ -1,28 +1,35 @@
 import dayjs, { Dayjs } from "dayjs";
 import Box from "@material-ui/core/Box";
-import { Status, StatusBgcolor, StatusColor } from "lib/StatusColorText/types";
+import { Status, StatusColor, TextColor } from "lib/StatusColorText/types";
 
 export function StatusColorText(props: {
   date: Dayjs | null;
   duration: number;
   text: string;
 }) {
-  let color: StatusColor;
-  let bgcolor: StatusBgcolor;
+  let color: TextColor;
+  let bgcolor: StatusColor;
+
   if (props.date) {
+    color = "primary.contrastText";
     const daysSinceDate = dayjs().diff(props.date, "days");
     if (daysSinceDate > props.duration) {
-      color = Status.overdueText;
-      bgcolor = Status.overdueBg;
+      bgcolor = Status.overdue;
     } else if (daysSinceDate === props.duration) {
-      color = Status.due;
+      bgcolor = Status.due;
     } else {
-      color = Status.okay;
+      bgcolor = Status.okay;
     }
   }
 
   return (
-    <Box component="span" color={color} bgcolor={bgcolor} px={1}>
+    <Box
+      component="span"
+      color={color}
+      bgcolor={bgcolor}
+      borderRadius={4}
+      p={1}
+    >
       {props.text}
     </Box>
   );

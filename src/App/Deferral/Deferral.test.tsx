@@ -110,7 +110,7 @@ test("inputting values enables the next input and updates title and subtitle", a
   expect(dialog).not.toHaveLength(0);
   userEvent.keyboard("{enter}");
   await waitFor(() => expect(datepicker).not.toBeVisible());
-  expect(title).toHaveStyle(`color: ${palette.success.main}`);
+  expect(title).toHaveStyle({ backgroundColor: palette.success.main });
 
   // select new type resets category, duration, and date
   userEvent.click(title);

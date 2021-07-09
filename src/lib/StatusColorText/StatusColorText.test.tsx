@@ -11,7 +11,7 @@ test("text color is 'success' when inspection expires after today", () => {
     <StatusColorText date={thirteenDaysAgo} duration={14} text="14-day" />
   );
   const text = screen.getByText("14-day");
-  expect(text).toHaveStyle(`color: ${palette.success.main}`);
+  expect(text).toHaveStyle({ backgroundColor: palette.success.main });
 });
 
 test("title color is 'warning' when inspection expires today", () => {
@@ -20,15 +20,12 @@ test("title color is 'warning' when inspection expires today", () => {
     <StatusColorText date={fourteenDaysAgo} duration={14} text="14-day" />
   );
   const title = screen.getByText("14-day");
-  expect(title).toHaveStyle(`color: ${palette.warning.main}`);
+  expect(title).toHaveStyle({ backgroundColor: palette.warning.main });
 });
 
 test("title color is 'error' when inspection is expired", () => {
   const fifteenDaysAgo = dayjs().subtract(15, "day");
   render(<StatusColorText date={fifteenDaysAgo} duration={14} text="14-day" />);
   const title = screen.getByText("14-day");
-  expect(title).toHaveStyle({
-    color: palette.error.contrastText,
-    backgroundColor: palette.error.main,
-  });
+  expect(title).toHaveStyle({ backgroundColor: palette.error.main });
 });
