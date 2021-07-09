@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 
 export function useSessionState<State>(
-  sessionStorageKey: string,
+  storageKey: string,
   initialState: State
 ) {
-  const storedState = sessionStorage.getItem(sessionStorageKey);
-  const currentState =
-    storedState === null ? initialState : (JSON.parse(storedState) as State);
-  const [state, setState] = useState(currentState);
-  const keyRef = useRef(sessionStorageKey);
+  const storedItem = sessionStorage.getItem(storageKey);
+  const initializer =
+    storedItem === null ? initialState : (JSON.parse(storedItem) as State);
+  const state = useState(initializer);
+  const storageKeyRef = useRef(storageKey);
 
   useEffect(() => {
-    sessionStorage.setItem(keyRef.current, JSON.stringify(state));
+    sessionStorage.setItem(storageKeyRef.current, JSON.stringify(state[0]));
   }, [state]);
 
-  return [state, setState] as [typeof state, typeof setState];
+  return state;
 }

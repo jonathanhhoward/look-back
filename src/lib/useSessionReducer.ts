@@ -1,19 +1,19 @@
-import { useEffect, useReducer, useRef } from "react";
+import { Reducer, useEffect, useReducer, useRef } from "react";
 
 export function useSessionReducer<State, Action>(
-  sessionStorageKey: string,
-  reducer: (state: State, action: Action) => State,
+  storageKey: string,
+  reducer: Reducer<State, Action>,
   initialState: State
 ) {
-  const storedState = sessionStorage.getItem(sessionStorageKey);
-  const currentState =
-    storedState === null ? initialState : (JSON.parse(storedState) as State);
-  const [state, dispatch] = useReducer(reducer, currentState);
-  const keyRef = useRef(sessionStorageKey);
+  const storedItem = sessionStorage.getItem(storageKey);
+  const initializer =
+    storedItem === null ? initialState : (JSON.parse(storedItem) as State);
+  const state = useReducer(reducer, initializer);
+  const storageKeyRef = useRef(storageKey);
 
   useEffect(() => {
-    sessionStorage.setItem(keyRef.current, JSON.stringify(state));
+    sessionStorage.setItem(storageKeyRef.current, JSON.stringify(state[0]));
   }, [state]);
 
-  return [state, dispatch] as [typeof state, typeof dispatch];
+  return state;
 }
