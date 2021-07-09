@@ -13,13 +13,12 @@ export function StatusColorText(props: {
   if (props.date) {
     color = "primary.contrastText";
     const daysSinceDate = dayjs().diff(props.date, "days");
-    if (daysSinceDate > props.duration) {
-      bgcolor = Status.overdue;
-    } else if (daysSinceDate === props.duration) {
-      bgcolor = Status.due;
-    } else {
-      bgcolor = Status.okay;
-    }
+    bgcolor =
+      daysSinceDate > props.duration
+        ? Status.overdue
+        : daysSinceDate === props.duration
+        ? Status.due
+        : Status.okay;
   }
 
   return (
