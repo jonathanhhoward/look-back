@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import { StatusColorText } from "lib/StatusColorText";
 
-const { palette } = createMuiTheme();
+const { palette } = createTheme();
 
 test("text color is 'success' when inspection expires after today", () => {
   const thirteenDaysAgo = dayjs().subtract(13, "day");

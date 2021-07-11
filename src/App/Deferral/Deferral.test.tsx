@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import { Deferral } from "App/Deferral";
 
-const { palette } = createMuiTheme();
+const { palette } = createTheme();
 const handleDelete = jest.fn();
 
 beforeEach(() => {
