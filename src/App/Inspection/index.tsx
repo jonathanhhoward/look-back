@@ -9,8 +9,10 @@ import { StatusColorText } from "lib/StatusColorText";
 import { useAutoCollapse } from "lib/useAutoCollapse";
 import { useSessionState } from "lib/useSessionState";
 
+const initialState: Dayjs | null = null;
+
 export function Inspection(props: { title: string; duration: number }) {
-  const [date, setDate] = useSessionState<Dayjs | null>(props.title, null);
+  const [date, setDate] = useSessionState(props.title, initialState);
   const { expanded, changeExpanded, autoCollapse } = useAutoCollapse(
     date === null
   );

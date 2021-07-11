@@ -12,11 +12,10 @@ interface DeferralId {
   id: string;
 }
 
+const initialState: DeferralId[] = [];
+
 export function DeferralList() {
-  const [deferrals, setDeferrals] = useSessionState<DeferralId[]>(
-    "deferrals",
-    []
-  );
+  const [deferrals, setDeferrals] = useSessionState("deferrals", initialState);
   const deferralList = deferrals.map((deferral) => (
     <Deferral
       id={deferral.id}
